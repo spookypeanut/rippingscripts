@@ -1,0 +1,12 @@
+Disc Title: CSI_SERIES_2_EPS_1_TO_4
+Title: 01, Length: 00:42:13.560 Chapters: 03, Cells: 03, Audio streams: 02, Subpictures: 01
+Title: 02, Length: 00:41:54.480 Chapters: 03, Cells: 03, Audio streams: 01, Subpictures: 01
+Title: 03, Length: 00:42:03.600 Chapters: 03, Cells: 03, Audio streams: 01, Subpictures: 01
+Title: 04, Length: 00:41:08.760 Chapters: 03, Cells: 03, Audio streams: 01, Subpictures: 01
+Title: 05, Length: 00:01:03.400 Chapters: 01, Cells: 01, Audio streams: 01, Subpictures: 00
+Title: 06, Length: 00:01:47.000 Chapters: 01, Cells: 01, Audio streams: 01, Subpictures: 00
+Title: 07, Length: 00:02:33.800 Chapters: 01, Cells: 01, Audio streams: 01, Subpictures: 00
+Title: 08, Length: 00:09:55.200 Chapters: 01, Cells: 01, Audio streams: 01, Subpictures: 00
+Title: 09, Length: 00:00:11.560 Chapters: 01, Cells: 01, Audio streams: 01, Subpictures: 00
+Title: 10, Length: 00:00:23.960 Chapters: 01, Cells: 01, Audio streams: 01, Subpictures: 00
+Longest track: 01

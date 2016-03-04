@@ -1,0 +1,9 @@
+Disc Title: CSI_DISC_04
+Title: 01, Length: 00:43:16.800 Chapters: 03, Cells: 03, Audio streams: 01, Subpictures: 01
+Title: 02, Length: 00:41:50.200 Chapters: 03, Cells: 03, Audio streams: 01, Subpictures: 01
+Title: 03, Length: 00:43:17.400 Chapters: 03, Cells: 03, Audio streams: 01, Subpictures: 01
+Title: 04, Length: 00:41:21.800 Chapters: 03, Cells: 03, Audio streams: 01, Subpictures: 01
+Title: 05, Length: 00:02:17.400 Chapters: 01, Cells: 01, Audio streams: 01, Subpictures: 00
+Title: 06, Length: 00:00:10.600 Chapters: 01, Cells: 01, Audio streams: 01, Subpictures: 00
+Title: 07, Length: 00:00:23.200 Chapters: 01, Cells: 01, Audio streams: 01, Subpictures: 00
+Longest track: 03

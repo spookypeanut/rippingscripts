@@ -1,0 +1,9 @@
+Disc Title: CSI_SERIES_3_EPS_13_TO_16
+Title: 01, Length: 00:00:00.440 Chapters: 01, Cells: 01, Audio streams: 00, Subpictures: 00
+Title: 02, Length: 00:42:16.280 Chapters: 03, Cells: 03, Audio streams: 02, Subpictures: 01
+Title: 03, Length: 00:39:23.760 Chapters: 03, Cells: 03, Audio streams: 01, Subpictures: 01
+Title: 04, Length: 01:01:25.200 Chapters: 03, Cells: 04, Audio streams: 02, Subpictures: 01
+Title: 05, Length: 00:41:09.200 Chapters: 03, Cells: 03, Audio streams: 01, Subpictures: 01
+Title: 06, Length: 00:00:11.560 Chapters: 01, Cells: 01, Audio streams: 01, Subpictures: 00
+Title: 07, Length: 00:00:23.960 Chapters: 01, Cells: 01, Audio streams: 01, Subpictures: 00
+Longest track: 04

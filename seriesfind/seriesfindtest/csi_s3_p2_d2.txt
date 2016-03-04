@@ -1,0 +1,10 @@
+Disc Title: CSI_SERIES_3_EPS_17_TO_20
+Title: 01, Length: 00:00:00.440 Chapters: 01, Cells: 01, Audio streams: 00, Subpictures: 00
+Title: 02, Length: 00:00:11.560 Chapters: 01, Cells: 01, Audio streams: 01, Subpictures: 00
+Title: 03, Length: 00:00:23.960 Chapters: 01, Cells: 01, Audio streams: 01, Subpictures: 00
+Title: 04, Length: 00:41:47.560 Chapters: 03, Cells: 03, Audio streams: 01, Subpictures: 01
+Title: 05, Length: 00:42:16.240 Chapters: 03, Cells: 03, Audio streams: 01, Subpictures: 01
+Title: 06, Length: 00:41:37.960 Chapters: 03, Cells: 03, Audio streams: 01, Subpictures: 01
+Title: 07, Length: 00:41:18.720 Chapters: 03, Cells: 03, Audio streams: 01, Subpictures: 01
+Title: 08, Length: 00:11:45.960 Chapters: 01, Cells: 01, Audio streams: 01, Subpictures: 00
+Longest track: 05

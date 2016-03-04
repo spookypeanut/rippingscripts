@@ -1,0 +1,21 @@
+Disc Title: CSI_DISC_06
+Title: 01, Length: 00:41:31.400 Chapters: 03, Cells: 03, Audio streams: 01, Subpictures: 01
+Title: 02, Length: 00:42:21.200 Chapters: 03, Cells: 03, Audio streams: 01, Subpictures: 01
+Title: 03, Length: 00:43:18.480 Chapters: 03, Cells: 03, Audio streams: 01, Subpictures: 01
+Title: 04, Length: 00:39:45.800 Chapters: 62, Cells: 62, Audio streams: 01, Subpictures: 00
+Title: 05, Length: 00:06:35.120 Chapters: 07, Cells: 07, Audio streams: 01, Subpictures: 00
+Title: 06, Length: 00:06:23.600 Chapters: 08, Cells: 08, Audio streams: 01, Subpictures: 00
+Title: 07, Length: 00:03:51.760 Chapters: 08, Cells: 08, Audio streams: 01, Subpictures: 00
+Title: 08, Length: 00:02:26.960 Chapters: 06, Cells: 06, Audio streams: 01, Subpictures: 00
+Title: 09, Length: 00:02:30.080 Chapters: 05, Cells: 05, Audio streams: 01, Subpictures: 00
+Title: 10, Length: 00:03:24.680 Chapters: 06, Cells: 06, Audio streams: 01, Subpictures: 00
+Title: 11, Length: 00:05:00.640 Chapters: 08, Cells: 08, Audio streams: 01, Subpictures: 00
+Title: 12, Length: 00:01:53.880 Chapters: 04, Cells: 04, Audio streams: 01, Subpictures: 00
+Title: 13, Length: 00:02:37.280 Chapters: 06, Cells: 06, Audio streams: 01, Subpictures: 00
+Title: 14, Length: 00:00:37.000 Chapters: 03, Cells: 03, Audio streams: 01, Subpictures: 00
+Title: 15, Length: 00:02:08.480 Chapters: 05, Cells: 05, Audio streams: 01, Subpictures: 00
+Title: 16, Length: 00:01:14.400 Chapters: 05, Cells: 05, Audio streams: 01, Subpictures: 00
+Title: 17, Length: 00:01:08.040 Chapters: 03, Cells: 03, Audio streams: 01, Subpictures: 00
+Title: 18, Length: 00:00:10.600 Chapters: 01, Cells: 01, Audio streams: 01, Subpictures: 00
+Title: 19, Length: 00:00:23.200 Chapters: 01, Cells: 01, Audio streams: 01, Subpictures: 00
+Longest track: 03
