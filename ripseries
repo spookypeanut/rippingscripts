@@ -1,0 +1,84 @@
+#!/usr/bin/env python
+
+from __future__ import print_function, division, absolute_import
+import os
+import argparse
+from subprocess import check_call
+from hjsb.seriesfind import Finder
+
+DVD_DEVICE = "/dev/dvd"
+
+
+def parse_arguments():
+    p = argparse.ArgumentParser()
+    p.add_argument("--name", help="The name of the TV program")
+    p.add_argument("--series", help="The series number")
+    p.add_argument("--start", help="The episode number to start at")
+    p.add_argument("--tracks", help="The tracks to rip")
+    return p.parse_args()
+
+
+def run_rip_command(num, name):
+    cmd = ["riptrack.sh", num, name]
+    check_call(cmd)
+
+
+def main():
+    args = parse_arguments()
+    if args.tracks:
+        tracks = map(int, args.tracks.split(" ,"))
+    else:
+        tracks = Finder().find_series()
+    print(tracks)
+    print("Tracks to rip: %s (%s in total)" % (tracks, len(tracks)))
+    if args.name:
+        name = args.name
+    else:
+        print("Enter name of the TV series")
+        name = raw_input()
+    if args.series:
+        series = int(args.series)
+    else:
+        print("Enter the series number (leave blank for none)")
+        series = raw_input()
+        if series == "":
+            series = None
+        else:
+            series = int(series)
+    if args.start:
+        start = args.start
+    else:
+        print("Enter the starting episode number (leave blank for 1)")
+        start = raw_input()
+        if start == "":
+            start = 1
+        else:
+            start = int(start)
+
+    if series is None:
+        base = name
+    else:
+        base = "%s/Series %s" % (name, series)
+
+    msg = "Ripping %s episodes (tracks %s) starting at %s"
+    print(msg % (len(tracks), tracks, start))
+    try:
+        os.makedirs(base)
+    except OSError:
+        if not os.path.exists(base):
+            raise
+    for (episode_num, track_num) in enumerate(tracks, start=int(start)):
+        basename = "%s.s%02de%02d" % (name, series, episode_num)
+        out = os.path.join(base, basename)
+        print("=" * 50)
+        print("Ripping DVD track %s to file %s" % (track_num, out))
+        print("=" * 50)
+        cmd = ["riptrack.sh", str(track_num), out, DVD_DEVICE]
+        print("Running %s" % cmd)
+        check_call(cmd)
+    print("Finished ripping %s episodes to %s" % (len(tracks), base))
+    check_call(["eject", DVD_DEVICE])
+
+
+if __name__ == "__main__":
+    main()

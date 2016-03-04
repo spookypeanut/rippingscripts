@@ -1,0 +1,31 @@
+#!/usr/bin/env python
+from __future__ import division, print_function
+import sys
+import re
+
+factor = 1 / 0.96
+time_regex = '(?P<{0}hour>\d{{2}}):(?P<{0}min>\d{{2}}):(?P<{0}sec>[\d,]*)'
+start_regex = time_regex.format("start_")
+end_regex = time_regex.format("end_")
+timeline_regex = re.compile("%s --> %s" % (start_regex, end_regex))
+
+
+def rescale(h, m, s):
+    total_sec = int(h) * 3600 + int(m) * 60 + float(s.replace(",", "."))
+    total_sec *= factor
+    h = total_sec // 3600
+    total_sec = total_sec % 3600
+    m = total_sec // 60
+    s = total_sec % 60
+    return ("%02d:%02d:%02.3f" % (h, m, s)).replace(".", ",")
+
+
+for orig_line in sys.stdin.readlines():
+    m = timeline_regex.match(orig_line)
+    if not m:
+        sys.stdout.write(orig_line)
+        continue
+    r = m.groupdict()
+    s = rescale(r["start_hour"], r["start_min"], r["start_sec"])
+    e = rescale(r["end_hour"], r["end_min"], r["end_sec"])
+    sys.stdout.write("%s --> %s\n" % (s, e))

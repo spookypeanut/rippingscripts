@@ -1,0 +1,49 @@
+#!/usr/bin/env python
+
+from __future__ import division, print_function
+import os
+import sys
+from subprocess import Popen, PIPE
+
+
+def extract_cmd(vob, num):
+    return "tccat -i %s | tcextract -x ps1 -t vob -a 0x%x" % (vob, num)
+
+
+def all_extract_cmds(vob):
+    return [extract_cmd(vob, n) for n in range(0x20, 0x30)]
+
+
+def main():
+    vob = sys.argv[1]
+    try:
+        output = sys.argv[2]
+    except IndexError:
+        output = "chosen-sub"
+    extract_cmds = all_extract_cmds(vob)
+    subs = []
+    for cmd in extract_cmds:
+        print("Running '%s'" % cmd)
+        p = Popen(cmd, shell=True, stdout=PIPE)
+        sub = p.communicate()[0]
+        if len(sub) == 0:
+            break
+        subs.append(sub)
+
+    for sub in subs:
+        size = len(sub)
+        if size == 0:
+            continue
+    subs = sorted(subs, key=lambda x: len(x))
+    highest = subs[-1]
+    lowest = subs[0]
+    if len(lowest) / len(highest) < 0.1:
+        with open(output, "w") as f:
+            f.write(lowest)
+        print("Subtitles written to %s" % os.path.realpath(output))
+    else:
+        print("No suitable subtitles found")
+
+
+if __name__ == "__main__":
+    main()
