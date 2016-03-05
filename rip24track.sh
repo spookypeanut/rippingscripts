@@ -15,9 +15,9 @@ else
     HBOUTPATH="$(echo $2 | sed 's/:/-/g')"
 fi
 HBSUBPATH="${HBOUTPATH%%.$HBEXT}.Forced.srt"
-if [ -f $HBOUTPATH ]
+if [ -f "$HBOUTPATH" ]
 then
-    echo "About to delete $HBOUTPATH: press ctrl-c to abort"
+    echo "About to delete '$HBOUTPATH': press ctrl-c to abort"
     read  DISCARDED
     rm -v $HBOUTPATH
 fi
@@ -49,7 +49,7 @@ else
     subtitle2pgm -o $PGMBASE -c 255,0,255,255 < $TMPSUBS
     pgm2txt $PGMBASE
     srttool -s -w < ${PGMBASE}.srtx > ${PGMBASE}.srt
-    cat ${PGMBASE}.srt | rescale_srt > $HBSUBPATH
+    cat ${PGMBASE}.srt | rescale_srt > "$HBSUBPATH"
 fi
 END=$(date +%s)
 SUBTIME=$(($END - $START))
@@ -61,7 +61,7 @@ END=$(date +%s)
 echo "Rip took ${RIPTIME}s"
 echo "Subtitles took ${SUBTIME}s"
 echo "Compress took $(($END - $START))s"
-echo "\nFilm file is '$HBOUTPATH'"
-if [ -f $HBSUBPATH ]; then
+echo -e "\nFilm file is '$HBOUTPATH'"
+if [ -f "$HBSUBPATH" ]; then
     echo "Subtitles are in '$HBSUBPATH'"
 fi
