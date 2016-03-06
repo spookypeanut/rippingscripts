@@ -37,6 +37,7 @@ DEST=24
 START=$(date +%s)
 echo "Getting subtitles"
 SUBDIR="tempsubdir"
+mkdir -p $SUBDIR
 TMPSUBS="$SUBDIR/chosen-sub"
 rm -v $TMPSUBS
 find-subs $MPGRIP $TMPSUBS
@@ -44,8 +45,7 @@ if [ ! -f $TMPSUBS ]; then
     SUBTITLEFILTER=
 else
     echo "Found subtitles to use"
-    mkdir -p $SUBDIR
-    PGMBASE=$SUBDIR/$TMPSUBS 
+    PGMBASE=$TMPSUBS 
     subtitle2pgm -o $PGMBASE -c 255,0,255,255 < $TMPSUBS
     pgm2txt $PGMBASE
     srttool -s -w < ${PGMBASE}.srtx > ${PGMBASE}.srt
