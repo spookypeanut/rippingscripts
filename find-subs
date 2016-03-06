@@ -38,9 +38,10 @@ def main():
     highest = subs[-1]
     lowest = subs[0]
     if len(lowest) / len(highest) < 0.1:
+        output = os.path.realpath(output)
         with open(output, "w") as f:
             f.write(lowest)
-        print("Subtitles written to %s" % os.path.realpath(output))
+        print("Subtitles written to %s" % output)
     else:
         print("No suitable subtitles found")
 
