@@ -1,0 +1,12 @@
+Disc Title: CSI_SERIES_2_EPS_21_TO_23
+Title: 01, Length: 00:42:45.320 Chapters: 03, Cells: 03, Audio streams: 01, Subpictures: 01
+Title: 02, Length: 00:44:49.600 Chapters: 03, Cells: 03, Audio streams: 01, Subpictures: 01
+Title: 03, Length: 00:42:35.320 Chapters: 03, Cells: 03, Audio streams: 01, Subpictures: 01
+Title: 04, Length: 00:08:33.760 Chapters: 01, Cells: 01, Audio streams: 01, Subpictures: 00
+Title: 05, Length: 00:06:27.120 Chapters: 01, Cells: 01, Audio streams: 01, Subpictures: 00
+Title: 06, Length: 00:11:37.480 Chapters: 01, Cells: 01, Audio streams: 01, Subpictures: 00
+Title: 07, Length: 00:09:04.880 Chapters: 01, Cells: 01, Audio streams: 01, Subpictures: 00
+Title: 08, Length: 00:01:41.000 Chapters: 01, Cells: 01, Audio streams: 01, Subpictures: 00
+Title: 09, Length: 00:00:11.560 Chapters: 01, Cells: 01, Audio streams: 01, Subpictures: 00
+Title: 10, Length: 00:00:23.960 Chapters: 01, Cells: 01, Audio streams: 01, Subpictures: 00
+Longest track: 02
