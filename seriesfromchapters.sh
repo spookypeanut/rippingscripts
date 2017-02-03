@@ -4,7 +4,7 @@ HBRIPLOG="./rip.log"
 
 if [ "$1" == "" ]
 then
-    HBTRACKINFO=$(lsdvd $HBDVDDEV | awk -f ~/bin/serieschaptersfind.awk)
+    HBTRACKINFO=$(lsdvd $HBDVDDEV | awk -f ~/rippingscripts/serieschaptersfind.awk)
 else 
     HBTRACKINFO="$@"
 fi
