@@ -17,9 +17,9 @@ fi
 
 if [ "$2" == "${2%%$HBEXT}" ]
 then
-    HBOUTPATH="$(echo $2.$HBEXT | sed 's/:/-/g')"
+    HBOUTPATH="$(echo -n $2.$HBEXT | sed 's/:/-/g')"
 else
-    HBOUTPATH="$($2 | sed 's/:/-/g')"
+    HBOUTPATH="$(echo -n $2 | sed 's/:/-/g')"
 fi
 
 if [ "$3" != "" ]
