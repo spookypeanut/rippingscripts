@@ -1,0 +1,70 @@
+#!/usr/bin/env python
+
+import sys
+from argparse import ArgumentParser
+from subprocess import Popen, PIPE
+
+
+def time_string_to_seconds(rawdur):
+    rawdur, _, milli = rawdur.rpartition(".")
+    milli = int(milli)
+    rawdur, _, sec = rawdur.rpartition(":")
+    sec = int(sec)
+    rawdur, _, mins = rawdur.rpartition(":")
+    mins = int(mins)
+    hours = int(rawdur)
+    return (3600 * hours + 60 * mins + sec + (milli / 1000))
+
+
+def get_track_length(track_num):
+    cmd = ["lsdvd"]
+    p = Popen(cmd, stdout=PIPE)
+    stdout, stderr = p.communicate()
+    for line in stdout.split("\n"):
+        line = line.strip()
+        start = line.split(",")[0]
+        if "%02d" % int(track_num) in start:
+            break
+    else:
+        raise RuntimeError
+    rawdur = line.split()[3]
+    return time_string_to_seconds(rawdur)
+
+
+def get_file_length(eachfile):
+    cmd = ["ffmpeg", "-i", eachfile]
+    p = Popen(cmd, stderr=PIPE)
+    stdout, stderr = p.communicate()
+    for line in stderr.split("\n"):
+        if "Duration" in line:
+            break
+    else:
+        raise RuntimeError
+    line = line.strip()
+    rawdur = line.split()[1]
+    rawdur = rawdur.rstrip(",")
+    return time_string_to_seconds(rawdur)
+
+
+def parse_arguments():
+    parser = ArgumentParser()
+    parser.add_argument("--file", help="The file check the duration of",
+                        required=True)
+    parser.add_argument("--track", help="The DVD track number to check the "
+                        "duration of", required=True)
+    return parser.parse_args()
+
+
+def main():
+    args = parse_arguments()
+    track_length = get_track_length(args.track)
+    file_length = get_file_length(args.file)
+    print("track: %ss vs file: %ss" % (track_length, file_length))
+    if abs(track_length - file_length) <= 5:
+        return True
+    return False
+
+if __name__ == "__main__":
+    if main() is True:
+        sys.exit(0)
+    sys.exit(1)

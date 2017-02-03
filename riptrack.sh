@@ -36,3 +36,10 @@ echo "Running $HBCMD ..."
 eval $HBCMD
 echo -n "Time now: " >&2
 date >&2
+echo "Checking durations..."
+if checklength --file "$HBOUTPATH" --track $1
+then
+    echo "All good"
+else
+    echo "TIMES DO NOT MATCH!"
+fi
