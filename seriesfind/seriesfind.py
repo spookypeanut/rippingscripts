@@ -4,7 +4,7 @@ from subprocess import Popen, PIPE
 
 # If two tracks are within this percentage, they could be part of a
 # series
-LENGTHDIFF = 15
+LENGTHDIFF = 20
 
 tests = {"csi_s1_p2_d1": [1, 2, 3, 4], "csi_s1_p2_d2": [1, 2, 3, 4],
          "csi_s1_p2_d3": [1, 2, 3, 4], "csi_s2_p1_d1": [1, 2, 3, 4],
