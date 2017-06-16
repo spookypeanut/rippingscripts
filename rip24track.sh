@@ -6,6 +6,10 @@ then
 	exit 1
 fi
 
+if [ $PGMCOLOUR == "" ]; then
+    PGMCOLOUR="255,255,0,255"
+fi
+
 HBEXT="mp4"
 
 if [ "$2" == "${2%%$HBEXT}" ]
@@ -25,9 +29,9 @@ fi
 echo "Ripping tack $1 to '$HBOUTPATH'"
 
 START=$(date +%s)
-echo "Ripping mpg"
+echo "Ripping DVD"
 MPGRIP=tmprip.mpg
-mplayer -dumpstream dvd://$1 -nocache -dvd-device /dev/dvd -dumpfile $MPGRIP
+#mplayer -dumpstream dvd://$1 -nocache -dvd-device /dev/dvd -dumpfile $MPGRIP
 echo "Rip file is $MPGRIP"
 END=$(date +%s)
 RIPTIME=$(($END - $START))
@@ -46,7 +50,7 @@ if [ ! -f $TMPSUBS ]; then
 else
     echo "Found subtitles to use"
     PGMBASE=$TMPSUBS 
-    subtitle2pgm -o $PGMBASE -c 255,0,255,255 < $TMPSUBS
+    subtitle2pgm -o $PGMBASE -c $PGMCOLOUR < $TMPSUBS
     pgm2txt $PGMBASE
     srttool -s -w < ${PGMBASE}.srtx > ${PGMBASE}.srt
     cat ${PGMBASE}.srt | rescale_srt > "$HBSUBPATH"
