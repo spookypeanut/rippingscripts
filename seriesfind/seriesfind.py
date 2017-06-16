@@ -4,7 +4,7 @@ from subprocess import Popen, PIPE
 
 # If two tracks are within this percentage, they could be part of a
 # series
-LENGTHDIFF = 20
+LENGTHDIFF = 25
 
 tests = {"csi_s1_p2_d1": [1, 2, 3, 4], "csi_s1_p2_d2": [1, 2, 3, 4],
          "csi_s1_p2_d3": [1, 2, 3, 4], "csi_s2_p1_d1": [1, 2, 3, 4],
@@ -23,6 +23,8 @@ tests = {"csi_s1_p2_d1": [1, 2, 3, 4], "csi_s1_p2_d2": [1, 2, 3, 4],
 
 
 def run_tests():
+    f = Finder()
+    print("Current DVD in drive: %s" % f.find_series())
     basepath = os.path.dirname(__file__)
     test_path = os.path.join(basepath, "seriesfindtest")
     all_lsdvds = sorted(glob(os.path.join(test_path, "*.txt")))
