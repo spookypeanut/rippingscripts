@@ -82,6 +82,8 @@ def main():
     print("Running %s" % HBCMD)
     p = Popen(HBCMD, stderr=PIPE)
     stdout, stderr = p.communicate()
+    if p.returncode != 0:
+        print(stderr)
     endtime = datetime.now()
     print("Finished at %s" % endtime)
     print("Took %ss" % (endtime - starttime).seconds)
