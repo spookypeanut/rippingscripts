@@ -17,9 +17,13 @@ def parse_args():
     parser = ArgumentParser()
     parser.add_argument("tracknum")
     parser.add_argument("filename")
-    parser.add_argument("--device")
+    msg = "The dvd device to use"
+    parser.add_argument("--device", help=msg)
+    msg = "Only rip this chapter of the track"
+    parser.add_argument("--chapter", help=msg)
     parser.add_argument("--animation", action="store_true")
     parser.add_argument("--decomb", action="store_true")
+    parser.add_argument("--deinterlace", action="store_true")
     return parser.parse_args()
 
 
@@ -33,9 +37,10 @@ def warning(msg):
 def main():
     args = parse_args()
     if "HBSUBTITLEFLAGS" in os.environ:
-        subtitleflags = ["-m"] + os.environ["HBSUBTITLEFLAGS"].split()
+        subtitleflags = os.environ["HBSUBTITLEFLAGS"].split()
     else:
-        subtitleflags = ["-m", "--subtitle", "scan", "--subtitle-forced", "scan"]
+        subtitleflags = ["--subtitle", "scan", "--subtitle-forced", "scan"]
+    subtitleflags = ["-m"] + subtitleflags
 
     print("Subtitle flags: %s" % subtitleflags)
     # Don't think this does anything
@@ -60,8 +65,10 @@ def main():
 
     starttime = datetime.now()
     print("Starting at %s" % starttime)
-    HBCMD = ["HandBrakeCLI", "-v0", "-i", device, "-t", str(args.tracknum),
-             "-o", outpath]
+    HBCMD = ["HandBrakeCLI", "-v0", "-i", device, "-t", str(args.tracknum)]
+    if args.chapter is not None:
+        HBCMD.extend(["-c", args.chapter])
+    HBCMD.extend(["-o", outpath])
     HBCMD.extend(subtitleflags)
     if args.decomb is True:
         warning("Using decomb")
