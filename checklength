@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+from ast import literal_eval
 import sys
 from argparse import ArgumentParser
 from subprocess import Popen, PIPE
@@ -18,25 +19,17 @@ def time_string_to_seconds(rawdur):
 
 
 def get_track_length(track_num, chapter=None):
-    if chapter is None:
-        cmd = ["lsdvd"]
-    else:
-        cmd = ["lsdvd", "-t", str(track_num), "-c"]
+    cmd = ["lsdvd", "-t", str(track_num), "-Oy"]
+    if chapter is not None:
+        cmd.append("-c")
     p = Popen(cmd, stdout=PIPE)
     stdout, stderr = p.communicate()
-    if chapter is None:
-        target_num = track_num
-    else:
-        target_num = chapter
-    for line in stdout.split("\n"):
-        line = line.strip()
-        start = line.split(",")[0]
-        if "%02d" % int(target_num) in start:
-            break
-    else:
-        raise RuntimeError
-    rawdur = line.split()[3]
-    return time_string_to_seconds(rawdur)
+    lsdvd = literal_eval(stdout[8:])
+    trackdict = [t for t in lsdvd["track"] if t["ix"] == track_num][0]
+    if chapter is not None:
+        chapterdict = [c for c in trackdict["chapter"] if c["ix"] == chapter][0]
+        return chapterdict["length"]
+    return trackdict["length"]
 
 
 def get_file_length(eachfile):
@@ -59,8 +52,9 @@ def parse_arguments():
     parser.add_argument("--file", help="The file check the duration of",
                         required=True)
     parser.add_argument("--track", help="The DVD track number to check the "
-                        "duration of", required=True)
-    parser.add_argument("--chapter", help="The DVD chapter number to check")
+                        "duration of", type=int, required=True)
+    parser.add_argument("--chapter", help="The DVD chapter number to check",
+                        type=int)
     return parser.parse_args()
 
 
