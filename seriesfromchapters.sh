@@ -45,9 +45,9 @@ do
     echo "********************************************************"
     echo "Ripping chapter $i from track $HBTRACKNUM to file $HBOUT"
     echo "********************************************************"
-    CMD="ripchapter.sh $HBTRACKNUM $i \"$HBOUT\" $HBDVDDEV | tee -a $HBRIPLOG"
+    CMD="riptrack.py $HBTRACKNUM \"$HBOUT\" --chapter $i --device $HBDVDDEV | tee -a $HBRIPLOG"
     echo "Running: $CMD"
-    eval $CMD
+    #eval $CMD
     j=$(($j+1))
 done
 echo "Finished ripping to $HBBASE ($HBEPISODES episodes)"
