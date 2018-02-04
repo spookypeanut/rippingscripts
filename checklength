@@ -6,6 +6,7 @@ from subprocess import Popen, PIPE
 
 
 def time_string_to_seconds(rawdur):
+    rawdur = rawdur.strip(",")
     rawdur, _, milli = rawdur.rpartition(".")
     milli = int(milli)
     rawdur, _, sec = rawdur.rpartition(":")
@@ -16,14 +17,21 @@ def time_string_to_seconds(rawdur):
     return (3600 * hours + 60 * mins + sec + (milli / 1000))
 
 
-def get_track_length(track_num):
-    cmd = ["lsdvd"]
+def get_track_length(track_num, chapter=None):
+    if chapter is None:
+        cmd = ["lsdvd"]
+    else:
+        cmd = ["lsdvd", "-t", str(track_num), "-c"]
     p = Popen(cmd, stdout=PIPE)
     stdout, stderr = p.communicate()
+    if chapter is None:
+        target_num = track_num
+    else:
+        target_num = chapter
     for line in stdout.split("\n"):
         line = line.strip()
         start = line.split(",")[0]
-        if "%02d" % int(track_num) in start:
+        if "%02d" % int(target_num) in start:
             break
     else:
         raise RuntimeError
@@ -52,12 +60,13 @@ def parse_arguments():
                         required=True)
     parser.add_argument("--track", help="The DVD track number to check the "
                         "duration of", required=True)
+    parser.add_argument("--chapter", help="The DVD chapter number to check")
     return parser.parse_args()
 
 
 def main():
     args = parse_arguments()
-    track_length = get_track_length(args.track)
+    track_length = get_track_length(args.track, chapter=args.chapter)
     file_length = get_file_length(args.file)
     print("track: %ss vs file: %ss" % (track_length, file_length))
     if abs(track_length - file_length) <= 5:
