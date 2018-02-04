@@ -19,7 +19,7 @@ def parse_arguments():
 
 
 def run_rip_command(num, name):
-    cmd = ["riptrack.sh", num, name]
+    cmd = ["riptrack.py", num, name]
     check_call(cmd)
 
 

@@ -8,6 +8,8 @@ HBDEFAULTSUB="--subtitle scan --subtitle-forced scan"
 HBSUBTITLEFLAGS=${HBSUBTITLEFLAGS-$HBDEFAULTSUB}
 echo "Subtitle flags: $HBSUBTITLEFLAGS"
 export DVDCSS_VERBOSE=0
+#echo "********************************* Warning: using animation tuning"
+#HBCODECFLAGS="--x264-tune animation -x ref=1:weightp=1:subq=2:rc-lookahead=10:trellis=0:8x8dct=0"
 HBCODECFLAGS="-x ref=1:weightp=1:subq=2:rc-lookahead=10:trellis=0:8x8dct=0"
 
 if [ $# -lt 2 ]
@@ -32,7 +34,8 @@ echo "Using DVD device $HBDVDDEV"
 echo "Current settings: copy video and audio"
 echo -n "Time now: " >&2
 date >&2
-HBCMD="HandBrakeCLI -v0 -i $HBDVDDEV -t $1 -o \"$HBOUTPATH\" -m $HBSUBTITLEFLAGS -e $HBCODEC -q $HBVIDEOQUALITY -B $HBAUDIOBITRATE $HBCODECFLAGS"
+HBCMD="HandBrakeCLI -v0 -i $HBDVDDEV -t $1 -o \"$HBOUTPATH\" -m $HBSUBTITLEFLAGS --decomb -e $HBCODEC -q $HBVIDEOQUALITY -B $HBAUDIOBITRATE $HBCODECFLAGS"
+#HBCMD="HandBrakeCLI -v0 -i $HBDVDDEV -t $1 -o \"$HBOUTPATH\" -m $HBSUBTITLEFLAGS -e $HBCODEC -q $HBVIDEOQUALITY -B $HBAUDIOBITRATE $HBCODECFLAGS"
 echo "Running $HBCMD ..."
 eval $HBCMD
 echo -n "Time now: " >&2
@@ -44,3 +47,4 @@ then
 else
     echo "TIMES DO NOT MATCH!"
 fi
+#echo "********************************* Warning: used animation tuning"
