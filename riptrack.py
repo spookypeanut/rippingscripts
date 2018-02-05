@@ -88,6 +88,9 @@ def main():
     print("Took %ss" % (endtime - starttime).seconds)
     try:
         cmd = ["checklength", "--file", outpath, "--track", args.tracknum]
+        if args.chapter is not None:
+            cmd.extend(["--chapter", args.chapter])
+        print("Checking: %s" % (cmd,))
         check_call(cmd)
         print("Length of video file matches length of track")
     except Exception:
