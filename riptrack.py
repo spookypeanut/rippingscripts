@@ -40,7 +40,6 @@ def main():
         subtitleflags = os.environ["HBSUBTITLEFLAGS"].split()
     else:
         subtitleflags = ["--subtitle", "scan", "--subtitle-forced", "scan"]
-    subtitleflags = ["-m"] + subtitleflags
 
     print("Subtitle flags: %s" % subtitleflags)
     # Don't think this does anything
@@ -68,7 +67,7 @@ def main():
     HBCMD = ["HandBrakeCLI", "-v0", "-i", device, "-t", str(args.tracknum)]
     if args.chapter is not None:
         HBCMD.extend(["-c", args.chapter])
-    HBCMD.extend(["-o", outpath])
+    HBCMD.extend(["-o", outpath, "-m"])
     HBCMD.extend(subtitleflags)
     if args.decomb is True:
         warning("Using decomb")
