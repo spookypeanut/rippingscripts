@@ -18,7 +18,7 @@ def time_string_to_seconds(rawdur):
     return (3600 * hours + 60 * mins + sec + (milli / 1000))
 
 
-def get_track_length(track_num, chapter=None):
+def get_track_len(track_num, chapter=None):
     cmd = ["lsdvd", "-t", str(track_num), "-Oy"]
     if chapter is not None:
         cmd.append("-c")
@@ -32,7 +32,7 @@ def get_track_length(track_num, chapter=None):
     return trackdict["length"]
 
 
-def get_file_length(eachfile):
+def get_file_len(eachfile):
     cmd = ["ffmpeg", "-i", eachfile]
     p = Popen(cmd, stderr=PIPE)
     stdout, stderr = p.communicate()
@@ -60,10 +60,11 @@ def parse_arguments():
 
 def main():
     args = parse_arguments()
-    track_length = get_track_length(args.track, chapter=args.chapter)
-    file_length = get_file_length(args.file)
-    print("track: %ss vs file: %ss" % (track_length, file_length))
-    if abs(track_length - file_length) <= 5:
+    track_len = get_track_len(args.track, chapter=args.chapter)
+    file_len = get_file_len(args.file)
+    diff = abs(1.0 * track_len - file_len)
+    print("Track: %ss, File: %ss (diff: %ss)" % (track_len, file_len, diff))
+    if diff <= 5:
         return True
     return False
 
