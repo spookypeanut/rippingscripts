@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 from __future__ import print_function, division, absolute_import
+from builtins import input
 import os
 import argparse
 from subprocess import check_call
@@ -35,12 +36,12 @@ def main():
         name = args.name
     else:
         print("Enter name of the TV series")
-        name = raw_input()
+        name = input()
     if args.series:
         series = int(args.series)
     else:
         print("Enter the series number (leave blank for none)")
-        series = raw_input()
+        series = input()
         if series == "":
             series = None
         else:
@@ -49,7 +50,7 @@ def main():
         start = args.start
     else:
         print("Enter the starting episode number (leave blank for 1)")
-        start = raw_input()
+        start = input()
         if start == "":
             start = 1
         else:
