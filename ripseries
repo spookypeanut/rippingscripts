@@ -19,8 +19,12 @@ def parse_arguments():
     return p.parse_args()
 
 
-def run_rip_command(num, name):
-    cmd = ["riptrack.py", num, name]
+def run_rip_command(num, name, device=None):
+    if device is not None:
+        cmd = ["riptrack.py", num, name, "--device", device]
+    else:
+        cmd = ["riptrack.py", num, name]
+    print("Running %s" % (cmd,))
     check_call(cmd)
 
 
@@ -74,9 +78,7 @@ def main():
         print("=" * 50)
         print("Ripping DVD track %s to file %s" % (track_num, out))
         print("=" * 50)
-        cmd = ["riptrack.sh", str(track_num), out, DVD_DEVICE]
-        print("Running %s" % cmd)
-        check_call(cmd)
+        run_rip_command(str(track_num), out, DVD_DEVICE)
     print("Finished ripping %s episodes to %s" % (len(tracks), base))
     check_call(["eject", DVD_DEVICE])
 
