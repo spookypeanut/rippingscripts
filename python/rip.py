@@ -1,6 +1,6 @@
 from ast import literal_eval
 from datetime import datetime
-from subprocess import Popen, PIPE, check_call
+from subprocess import Popen, PIPE
 from copy import copy
 
 HBDVDDEV = "/dev/dvd"
@@ -30,10 +30,10 @@ def get_lsdvd(track_num=None, chapter=False, device=None):
 def get_track_len(track_num, chapter=None, device=None):
     lsdvd = get_lsdvd(track_num=track_num, chapter=(chapter is not None),
                       device=device)
-    trackdict = [t for t in lsdvd["track"] if t["ix"] == track_num][0]
+    trackdict = [t for t in lsdvd["track"] if t["ix"] == int(track_num)][0]
     if chapter is not None:
-        chapterdict = [c for c in trackdict["chapter"] if c["ix"] == chapter][0]
-        return chapterdict["length"]
+        cdict = [c for c in trackdict["chapter"] if c["ix"] == int(chapter)][0]
+        return cdict["length"]
     return trackdict["length"]
 
 
