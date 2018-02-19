@@ -4,10 +4,8 @@ from __future__ import print_function, division, absolute_import
 from builtins import input
 import os
 import argparse
-from subprocess import check_call
 from seriesfind import Finder
-
-DVD_DEVICE = "/dev/dvd"
+from rip import rip_track
 
 
 def parse_arguments():
@@ -17,15 +15,6 @@ def parse_arguments():
     p.add_argument("--start", help="The episode number to start at")
     p.add_argument("--tracks", help="The tracks to rip")
     return p.parse_args()
-
-
-def run_rip_command(num, name, device=None):
-    if device is not None:
-        cmd = ["riptrack.py", num, name, "--device", device]
-    else:
-        cmd = ["riptrack.py", num, name]
-    print("Running %s" % (cmd,))
-    check_call(cmd)
 
 
 def main():
@@ -78,9 +67,8 @@ def main():
         print("=" * 50)
         print("Ripping DVD track %s to file %s" % (track_num, out))
         print("=" * 50)
-        run_rip_command(str(track_num), out, DVD_DEVICE)
+        rip_track(track_num, out)
     print("Finished ripping %s episodes to %s" % (len(tracks), base))
-    check_call(["eject", DVD_DEVICE])
 
 
 if __name__ == "__main__":
