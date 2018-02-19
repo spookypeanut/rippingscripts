@@ -1,50 +1,8 @@
 #!/usr/bin/env python
 
-from ast import literal_eval
 import sys
 from argparse import ArgumentParser
-from subprocess import Popen, PIPE
-
-
-def time_string_to_seconds(rawdur):
-    rawdur = rawdur.strip(",")
-    rawdur, _, milli = rawdur.rpartition(".")
-    milli = int(milli)
-    rawdur, _, sec = rawdur.rpartition(":")
-    sec = int(sec)
-    rawdur, _, mins = rawdur.rpartition(":")
-    mins = int(mins)
-    hours = int(rawdur)
-    return (3600 * hours + 60 * mins + sec + (milli / 1000))
-
-
-def get_track_len(track_num, chapter=None):
-    cmd = ["lsdvd", "-t", str(track_num), "-Oy"]
-    if chapter is not None:
-        cmd.append("-c")
-    p = Popen(cmd, stdout=PIPE)
-    stdout, stderr = p.communicate()
-    lsdvd = literal_eval(stdout[8:])
-    trackdict = [t for t in lsdvd["track"] if t["ix"] == track_num][0]
-    if chapter is not None:
-        chapterdict = [c for c in trackdict["chapter"] if c["ix"] == chapter][0]
-        return chapterdict["length"]
-    return trackdict["length"]
-
-
-def get_file_len(eachfile):
-    cmd = ["ffmpeg", "-i", eachfile]
-    p = Popen(cmd, stderr=PIPE)
-    stdout, stderr = p.communicate()
-    for line in stderr.split("\n"):
-        if "Duration" in line:
-            break
-    else:
-        raise RuntimeError
-    line = line.strip()
-    rawdur = line.split()[1]
-    rawdur = rawdur.rstrip(",")
-    return time_string_to_seconds(rawdur)
+from rip import check_length
 
 
 def parse_arguments():
@@ -60,13 +18,7 @@ def parse_arguments():
 
 def main():
     args = parse_arguments()
-    track_len = get_track_len(args.track, chapter=args.chapter)
-    file_len = get_file_len(args.file)
-    diff = abs(1.0 * track_len - file_len)
-    print("Track: %ss, File: %ss (diff: %ss)" % (track_len, file_len, diff))
-    if diff <= 5:
-        return True
-    return False
+    return check_length(args.file, args.track, args.chapter)
 
 if __name__ == "__main__":
     if main() is True:

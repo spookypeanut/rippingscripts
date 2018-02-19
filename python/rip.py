@@ -1,3 +1,4 @@
+from ast import literal_eval
 from datetime import datetime
 from subprocess import Popen, PIPE, check_call
 from copy import copy
@@ -10,6 +11,67 @@ HBVIDEOQUALITY = 21
 DEFAULT_SUBTITLE_FLAGS = ["--subtitle", "scan", "--subtitle-forced", "scan"]
 DEFAULT_CODEC_FLAGS = {"ref": 1, "weightp": 1, "subq": 2,
                        "rc-lookahead": 10, "trellis": 0, "8x8dct": 0}
+
+
+def get_lsdvd(track_num=None, chapter=False, device=None):
+    if device is None:
+        device = HBDVDDEV
+    cmd = ["lsdvd"]
+    if track_num is not None:
+        cmd.extend(["-t", str(track_num)])
+    if chapter is not False:
+        cmd.append("-c")
+    cmd.extend(["-Oy", device])
+    p = Popen(cmd, stdout=PIPE)
+    stdout, stderr = p.communicate()
+    return literal_eval(stdout[8:])
+
+
+def get_track_len(track_num, chapter=None, device=None):
+    lsdvd = get_lsdvd(track_num=track_num, chapter=(chapter is not None),
+                      device=device)
+    trackdict = [t for t in lsdvd["track"] if t["ix"] == track_num][0]
+    if chapter is not None:
+        chapterdict = [c for c in trackdict["chapter"] if c["ix"] == chapter][0]
+        return chapterdict["length"]
+    return trackdict["length"]
+
+
+def get_file_len(eachfile):
+    cmd = ["ffmpeg", "-i", eachfile]
+    p = Popen(cmd, stderr=PIPE)
+    stdout, stderr = p.communicate()
+    for line in stderr.split("\n"):
+        if "Duration" in line:
+            break
+    else:
+        raise RuntimeError
+    line = line.strip()
+    rawdur = line.split()[1]
+    rawdur = rawdur.rstrip(",")
+    return time_string_to_seconds(rawdur)
+
+
+def check_length(filename, track_num, chapter_num=None, device=None):
+    track_len = get_track_len(track_num, chapter=chapter_num)
+    file_len = get_file_len(filename)
+    diff = abs(1.0 * track_len - file_len)
+    print("Track: %ss, File: %ss (diff: %ss)" % (track_len, file_len, diff))
+    if diff <= 5:
+        return True
+    return False
+
+
+def time_string_to_seconds(rawdur):
+    rawdur = rawdur.strip(",")
+    rawdur, _, milli = rawdur.rpartition(".")
+    milli = int(milli)
+    rawdur, _, sec = rawdur.rpartition(":")
+    sec = int(sec)
+    rawdur, _, mins = rawdur.rpartition(":")
+    mins = int(mins)
+    hours = int(rawdur)
+    return (3600 * hours + 60 * mins + sec + (milli / 1000))
 
 
 def warning(msg):
@@ -64,12 +126,7 @@ def rip_track(track_num, filename, device=None, chapter=None, animation=False,
     endtime = datetime.now()
     print("Finished at %s" % endtime)
     print("Took %ss" % (endtime - starttime).seconds)
-    try:
-        cmd = ["checklength", "--file", outpath, "--track", track_num]
-        if chapter is not None:
-            cmd.extend(["--chapter", chapter])
-        print("Checking: %s" % (cmd,))
-        check_call(cmd)
+    if check_length(outpath, track_num, chapter, device):
         print("Length of video file matches length of track")
-    except Exception:
+    else:
         warning("TIMES DO NOT MATCH!")
