@@ -1,16 +1,7 @@
 #!/usr/bin/env python
 import os
 from argparse import ArgumentParser
-from datetime import datetime
-from subprocess import Popen, PIPE, check_call
-
-HBDVDDEV = "/dev/dvd"
-HBEXT = ".m4v"
-HBCODEC = "x264"
-HBAUDIOBITRATE = 160
-HBVIDEOQUALITY = 21
-DEFAULT_CODEC_FLAGS = {"ref": 1, "weightp": 1, "subq": 2,
-                       "rc-lookahead": 10, "trellis": 0, "8x8dct": 0}
+from rip import rip_track
 
 
 def parse_args():
@@ -39,62 +30,12 @@ def main():
     if "HBSUBTITLEFLAGS" in os.environ:
         subtitleflags = os.environ["HBSUBTITLEFLAGS"].split()
     else:
-        subtitleflags = ["--subtitle", "scan", "--subtitle-forced", "scan"]
+        subtitleflags = None
 
-    print("Subtitle flags: %s" % subtitleflags)
-    # Don't think this does anything
-    #export DVDCSS_VERBOSE=0
-
-    codecflags = DEFAULT_CODEC_FLAGS
-    compiled_flags = ":".join(["%s=%s" % a for a in codecflags.items()])
-    codec_args = ["-x", compiled_flags]
-    if args.animation is True:
-        warning("Using animation tuning")
-        codec_args = ["--x264-tune", "animation"] + codec_args
-
-    if args.filename.endswith(HBEXT):
-        outpath = args.filename
-    else:
-        outpath = args.filename + HBEXT
-
-    device = HBDVDDEV
-    if args.device is not None:
-        device = args.device
-    print("Using DVD device %s" % device)
-
-    starttime = datetime.now()
-    print("Starting at %s" % starttime)
-    HBCMD = ["HandBrakeCLI", "-v0", "-i", device, "-t", str(args.tracknum)]
-    if args.chapter is not None:
-        HBCMD.extend(["-c", args.chapter])
-    HBCMD.extend(["-o", outpath, "-m"])
-    HBCMD.extend(subtitleflags)
-    if args.decomb is True:
-        warning("Using decomb")
-        HBCMD.append("--decomb")
-    if args.deinterlace is True:
-        warning("Using deinterlace")
-        HBCMD.append("--deinterlace")
-    HBCMD.extend(["-e", HBCODEC, "-q", str(HBVIDEOQUALITY),
-                  "-B", str(HBAUDIOBITRATE)])
-    HBCMD.extend(codec_args)
-    print("Running %s" % HBCMD)
-    p = Popen(HBCMD, stderr=PIPE)
-    stdout, stderr = p.communicate()
-    if p.returncode != 0:
-        print(stderr)
-    endtime = datetime.now()
-    print("Finished at %s" % endtime)
-    print("Took %ss" % (endtime - starttime).seconds)
-    try:
-        cmd = ["checklength", "--file", outpath, "--track", args.tracknum]
-        if args.chapter is not None:
-            cmd.extend(["--chapter", args.chapter])
-        print("Checking: %s" % (cmd,))
-        check_call(cmd)
-        print("Length of video file matches length of track")
-    except Exception:
-        warning("TIMES DO NOT MATCH!")
+    rip_track(args.tracknum, args.filename, device=args.device,
+              chapter=args.chapter, animation=args.animation,
+              decomb=args.decomb, deinterlace=args.deinterlace,
+              subtitleflags=subtitleflags)
 
 if __name__ == "__main__":
     main()
