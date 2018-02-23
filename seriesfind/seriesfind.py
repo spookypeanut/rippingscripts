@@ -16,7 +16,8 @@ tests = {"csi_s1_p2_d1": [1, 2, 3, 4], "csi_s1_p2_d2": [1, 2, 3, 4],
          "csi_s3_p1_d1": [2, 3, 4, 5], "csi_s3_p1_d2": [2, 3, 4, 5],
          "csi_s3_p1_d3": [2, 3, 4, 5], "csi_s3_p2_d1": [2, 3, 4, 5],
          "csi_s3_p2_d2": [4, 5, 6, 7], "csi_s3_p2_d3": [2, 3, 4],
-         "csi_s4_p1_d3": [2, 3, 5, 6], "friends_27": [1, 2, 3, 4, 5, 6]}
+         "csi_s4_p1_d3": [2, 3, 5, 6], "friends_27": [1, 2, 3, 4, 5, 6],
+         "clonewars_s1_v3": [2, 3, 4, 5, 6, 7]}
 
 # csi_s3_p2_d1: contains a 1h episode. Matches if LENGTHDIFF goes to 40,
 #               but that seems rather extreme

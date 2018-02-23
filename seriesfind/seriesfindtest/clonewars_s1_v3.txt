@@ -1,0 +1,10 @@
+Disc Title: STAR_WARS_THE_CLONE_WARS_VOL_3
+Title: 01, Length: 02:09:13.600 Chapters: 25, Cells: 30, Audio streams: 04, Subpictures: 05
+Title: 02, Length: 00:21:41.000 Chapters: 05, Cells: 05, Audio streams: 04, Subpictures: 05
+Title: 03, Length: 00:21:41.600 Chapters: 05, Cells: 05, Audio streams: 04, Subpictures: 05
+Title: 04, Length: 00:21:41.600 Chapters: 05, Cells: 05, Audio streams: 04, Subpictures: 05
+Title: 05, Length: 00:21:37.880 Chapters: 05, Cells: 05, Audio streams: 04, Subpictures: 05
+Title: 06, Length: 00:21:40.920 Chapters: 05, Cells: 05, Audio streams: 04, Subpictures: 05
+Title: 07, Length: 00:20:50.600 Chapters: 05, Cells: 05, Audio streams: 04, Subpictures: 05
+Title: 08, Length: 00:00:09.480 Chapters: 02, Cells: 02, Audio streams: 04, Subpictures: 05
+Longest track: 01
