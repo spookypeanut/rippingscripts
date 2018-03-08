@@ -74,6 +74,12 @@ def time_string_to_seconds(rawdur):
     return (3600 * hours + 60 * mins + sec + (milli / 1000))
 
 
+def get_subtitle_flags():
+    if "HBSUBTITLEFLAGS" in os.environ:
+        return os.environ["HBSUBTITLEFLAGS"].split()
+    return DEFAULT_SUBTITLE_FLAGS
+
+
 def warning(msg):
     with_warning = "WARNING: %s" % msg
     print("*" * len(with_warning))

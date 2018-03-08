@@ -1,7 +1,6 @@
 #!/usr/bin/env python
-import os
 from argparse import ArgumentParser
-from rip import rip_track
+from rip import rip_track, get_subtitle_flags
 
 
 def parse_args():
@@ -27,15 +26,11 @@ def warning(msg):
 
 def main():
     args = parse_args()
-    if "HBSUBTITLEFLAGS" in os.environ:
-        subtitleflags = os.environ["HBSUBTITLEFLAGS"].split()
-    else:
-        subtitleflags = None
 
     rip_track(args.tracknum, args.filename, device=args.device,
               chapter=args.chapter, animation=args.animation,
               decomb=args.decomb, deinterlace=args.deinterlace,
-              subtitleflags=subtitleflags)
+              subtitleflags=get_subtitle_flags())
 
 if __name__ == "__main__":
     main()
