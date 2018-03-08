@@ -97,8 +97,9 @@ def dump_stderr(text):
     print("stderr of rip written to %s" % STDERR_DUMP)
 
 
-def rip_track(track_num, filename, device=None, chapter=None, animation=False,
-              decomb=False, deinterlace=False, subtitleflags=None):
+def rip_track(filename, track_num=None, device=None, inputfile=None,
+              chapter=None, animation=False, decomb=False, deinterlace=False,
+              subtitleflags=None):
     codecflags = copy(DEFAULT_CODEC_FLAGS)
     compiled_flags = ":".join(["%s=%s" % a for a in codecflags.items()])
     codec_args = ["-x", compiled_flags]
@@ -111,13 +112,20 @@ def rip_track(track_num, filename, device=None, chapter=None, animation=False,
     else:
         outpath = filename + HBEXT
 
+    if device is not None and inputfile is not None:
+        raise RippingError("Both device and inputfile specified")
     if device is None:
-        device = HBDVDDEV
-    print("Using DVD device %s" % device)
+        if inputfile is None:
+            device = HBDVDDEV
+        else:
+            device = inputfile
+    print("Input: %s" % device)
 
     starttime = datetime.now()
     print("Starting at %s" % starttime)
-    HBCMD = ["HandBrakeCLI", "-v0", "-i", device, "-t", str(track_num)]
+    HBCMD = ["HandBrakeCLI", "-v0", "-i", device]
+    if inputfile is None:
+        HBCMD.extend(["-t", str(track_num)])
     if chapter is not None:
         HBCMD.extend(["-c", chapter])
     HBCMD.extend(["-o", outpath, "-m"])
