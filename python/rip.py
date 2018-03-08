@@ -1,4 +1,5 @@
 from ast import literal_eval
+import os
 from datetime import datetime
 from subprocess import Popen, PIPE
 from copy import copy
@@ -11,7 +12,10 @@ HBVIDEOQUALITY = 21
 DEFAULT_SUBTITLE_FLAGS = ["--subtitle", "scan", "--subtitle-forced", "scan"]
 DEFAULT_CODEC_FLAGS = {"ref": 1, "weightp": 1, "subq": 2,
                        "rc-lookahead": 10, "trellis": 0, "8x8dct": 0}
+STDERR_DUMP = "/tmp/rip.log"
 
+class RippingError(Exception):
+    pass
 
 def get_lsdvd(track_num=None, chapter=False, device=None):
     if device is None:
@@ -87,6 +91,12 @@ def warning(msg):
     print("*" * len(with_warning))
 
 
+def dump_stderr(text):
+    with open(STDERR_DUMP, "w") as f:
+        f.write(text)
+    print("stderr of rip written to %s" % STDERR_DUMP)
+
+
 def rip_track(track_num, filename, device=None, chapter=None, animation=False,
               decomb=False, deinterlace=False, subtitleflags=None):
     codecflags = copy(DEFAULT_CODEC_FLAGS)
@@ -128,11 +138,15 @@ def rip_track(track_num, filename, device=None, chapter=None, animation=False,
     p = Popen(HBCMD, stderr=PIPE)
     stdout, stderr = p.communicate()
     if p.returncode != 0:
-        print(stderr)
+        dump_stderr(stderr)
+        msg = "Error occurred while ripping %s to %s" % (track_num, outpath)
+        raise RippingError(msg)
     endtime = datetime.now()
     print("Finished at %s" % endtime)
     print("Took %ss" % (endtime - starttime).seconds)
     if check_length(outpath, track_num, chapter, device):
         print("Length of video file matches length of track")
     else:
-        warning("TIMES DO NOT MATCH!")
+        dump_stderr(stderr)
+        msg = "Length of %s doesn't match track %s" % (outpath, track_num)
+        raise RippingError(msg)
