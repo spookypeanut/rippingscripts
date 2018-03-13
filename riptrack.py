@@ -27,7 +27,7 @@ def warning(msg):
 def main():
     args = parse_args()
 
-    rip_track(args.filename, tracknum=args.tracknum, device=args.device,
+    rip_track(args.filename, track_num=args.tracknum, device=args.device,
               chapter=args.chapter, animation=args.animation,
               decomb=args.decomb, deinterlace=args.deinterlace,
               subtitleflags=get_subtitle_flags())
