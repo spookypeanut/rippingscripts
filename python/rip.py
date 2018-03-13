@@ -14,8 +14,10 @@ DEFAULT_CODEC_FLAGS = {"ref": 1, "weightp": 1, "subq": 2,
                        "rc-lookahead": 10, "trellis": 0, "8x8dct": 0}
 STDERR_DUMP = "/tmp/rip.log"
 
+
 class RippingError(Exception):
     pass
+
 
 def get_lsdvd(track_num=None, chapter=False, device=None):
     if device is None:
@@ -56,11 +58,17 @@ def get_file_len(eachfile):
     return time_string_to_seconds(rawdur)
 
 
-def check_length(filename, track_num, chapter_num=None, device=None):
-    track_len = get_track_len(track_num, chapter=chapter_num)
-    file_len = get_file_len(filename)
-    diff = abs(1.0 * track_len - file_len)
-    print("Track: %ss, File: %ss (diff: %ss)" % (track_len, file_len, diff))
+def check_length(out_file, in_file=None, track_num=None, chapter_num=None,
+                 device=None):
+    if in_file is None:
+        if track_num is None:
+            raise ValueError("Nothing to check against")
+        in_len = get_file_len(in_file)
+    else:
+        in_len = get_track_len(track_num, chapter=chapter_num)
+    file_len = get_file_len(out_file)
+    diff = abs(1.0 * in_len - file_len)
+    print("Input: %ss, Output: %ss (diff: %ss)" % (in_len, file_len, diff))
     if diff <= 5:
         return True
     return False
@@ -153,9 +161,11 @@ def rip_track(filename, track_num=None, device=None, inputfile=None,
     print("Finished at %s" % endtime)
     print("Took %ss" % (endtime - starttime).seconds)
     if inputfile is not None:
-        return
-    if check_length(outpath, track_num, chapter, device):
-        print("Length of video file matches length of track")
+        length_check = check_length(outpath, in_file=inputfile)
+    else:
+        length_check = check_length(outpath, track_num, chapter, device)
+    if length_check is True:
+        print("Length of input matches length of output")
     else:
         dump_stderr(stderr)
         msg = "Length of %s doesn't match track %s" % (outpath, track_num)
