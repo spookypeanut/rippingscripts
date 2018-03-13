@@ -152,6 +152,8 @@ def rip_track(filename, track_num=None, device=None, inputfile=None,
     endtime = datetime.now()
     print("Finished at %s" % endtime)
     print("Took %ss" % (endtime - starttime).seconds)
+    if inputfile is not None:
+        return
     if check_length(outpath, track_num, chapter, device):
         print("Length of video file matches length of track")
     else:
