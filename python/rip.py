@@ -163,7 +163,8 @@ def rip_track(filename, track_num=None, device=None, inputfile=None,
     if inputfile is not None:
         length_check = check_length(outpath, in_file=inputfile)
     else:
-        length_check = check_length(outpath, track_num, chapter, device)
+        length_check = check_length(outpath, track_num=track_num,
+                                    chapter_num=chapter, device=device)
     if length_check is True:
         print("Length of input matches length of output")
     else:
