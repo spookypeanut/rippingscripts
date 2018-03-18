@@ -1,0 +1,10 @@
+Disc Title: CSI_LASVEGAS_7_2
+Title: 01, Length: 00:00:00.600 Chapters: 01, Cells: 01, Audio streams: 01, Subpictures: 00
+Title: 02, Length: 00:00:00.600 Chapters: 01, Cells: 01, Audio streams: 01, Subpictures: 00
+Title: 03, Length: 00:41:46.080 Chapters: 05, Cells: 05, Audio streams: 01, Subpictures: 01
+Title: 04, Length: 00:42:14.800 Chapters: 05, Cells: 05, Audio streams: 01, Subpictures: 01
+Title: 05, Length: 00:00:00.600 Chapters: 01, Cells: 01, Audio streams: 01, Subpictures: 00
+Title: 06, Length: 00:42:14.800 Chapters: 05, Cells: 05, Audio streams: 01, Subpictures: 01
+Title: 07, Length: 00:41:26.880 Chapters: 05, Cells: 05, Audio streams: 01, Subpictures: 01
+Title: 08, Length: 00:00:00.600 Chapters: 01, Cells: 01, Audio streams: 01, Subpictures: 00
+Longest track: 04
