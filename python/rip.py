@@ -13,10 +13,24 @@ DEFAULT_SUBTITLE_FLAGS = ["--subtitle", "scan", "--subtitle-forced", "scan"]
 DEFAULT_CODEC_FLAGS = {"ref": 1, "weightp": 1, "subq": 2,
                        "rc-lookahead": 10, "trellis": 0, "8x8dct": 0}
 STDERR_DUMP = "/tmp/rip.log"
+HANDBRAKE_BOOLEANS = set(["animation", "decomb", "deinterlace"])
 
 
 class RippingError(Exception):
     pass
+
+
+def add_handbrake_flags(argparser):
+    for boolean in HANDBRAKE_BOOLEANS:
+        argparser.add_argument("--%s" % boolean, action="store_true")
+    return argparser
+
+
+def get_handbrake_flags(args):
+    flags = {}
+    for boolean in HANDBRAKE_BOOLEANS:
+        flags[boolean] = getattr(args, boolean)
+    return flags
 
 
 def get_lsdvd(track_num=None, chapter=False, device=None):
@@ -106,12 +120,11 @@ def dump_stderr(text):
 
 
 def rip_track(filename, track_num=None, device=None, inputfile=None,
-              chapter=None, animation=False, decomb=False, deinterlace=False,
-              subtitleflags=None):
+              chapter=None, handbrake_flags=None):
     codecflags = copy(DEFAULT_CODEC_FLAGS)
     compiled_flags = ":".join(["%s=%s" % a for a in codecflags.items()])
     codec_args = ["-x", compiled_flags]
-    if animation is True:
+    if handbrake_flags["animation"] is True:
         warning("Using animation tuning")
         codec_args = ["--x264-tune", "animation"] + codec_args
 
@@ -137,14 +150,12 @@ def rip_track(filename, track_num=None, device=None, inputfile=None,
     if chapter is not None:
         HBCMD.extend(["-c", chapter])
     HBCMD.extend(["-o", outpath, "-m"])
-    if subtitleflags is None:
-        HBCMD.extend(DEFAULT_SUBTITLE_FLAGS)
-    else:
-        HBCMD.extend(subtitleflags)
-    if decomb is True:
+    HBCMD.extend(get_subtitle_flags())
+    HBCMD.append("--audio-lang-list=eng")
+    if handbrake_flags["decomb"] is True:
         warning("Using decomb")
         HBCMD.append("--decomb")
-    if deinterlace is True:
+    if handbrake_flags["deinterlace"] is True:
         warning("Using deinterlace")
         HBCMD.append("--deinterlace")
     HBCMD.extend(["-e", HBCODEC, "-q", str(HBVIDEOQUALITY),

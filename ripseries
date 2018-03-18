@@ -5,7 +5,7 @@ from builtins import input
 import os
 import argparse
 from seriesfind import Finder
-from rip import rip_track, get_subtitle_flags
+from rip import rip_track, add_handbrake_flags, get_handbrake_flags
 
 
 def parse_arguments():
@@ -14,11 +14,14 @@ def parse_arguments():
     p.add_argument("--series", help="The series number")
     p.add_argument("--start", help="The episode number to start at")
     p.add_argument("--tracks", help="The tracks to rip")
+    p = add_handbrake_flags(p)
     return p.parse_args()
 
 
 def main():
     args = parse_arguments()
+    hbflags = get_handbrake_flags(args)
+
     if args.tracks:
         tracks = map(int, args.tracks.split(" "))
     else:
@@ -67,7 +70,7 @@ def main():
         print("=" * 50)
         print("Ripping DVD track %s to file %s" % (track_num, out))
         print("=" * 50)
-        rip_track(out, track_num=track_num, subtitleflags=get_subtitle_flags())
+        rip_track(out, track_num=track_num, handbrake_flags=hbflags)
     print("Finished ripping %s episodes to %s" % (len(tracks), base))
 
 
