@@ -53,9 +53,9 @@ def main():
             start = int(start)
 
     if series is None:
-        base = name
+        base = os.path.join(name, "DVD")
     else:
-        base = "%s/Series %s" % (name, series)
+        base = os.path.join(name, "DVD", "Series %s" % series)
 
     msg = "Ripping %s episodes (tracks %s) starting at %s"
     print(msg % (len(tracks), tracks, start))
