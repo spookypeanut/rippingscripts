@@ -9,5 +9,8 @@ else
     OUTPUT=$(echo "$2"| sed 's@\"@\\\"@g')
 fi
 echo "input is $INPUT, output is $OUTPUT"
-ENCODECMD="HandBrakeCLI --preset-import-gui -Z frombluray -i \"$INPUT\" -o \"$OUTPUT\""
+
+_HBSUBFLAGS=`python -c 'from rip import get_subtitle_flags; print(" ".join(get_subtitle_flags()))'`
+ENCODECMD="HandBrakeCLI --preset-import-gui -Z frombluray $_HBSUBFLAGS -i \"$INPUT\" -o \"$OUTPUT\""
+echo "Running: $ENCODECMD"
 eval "$ENCODECMD"
