@@ -77,7 +77,7 @@ def check_length(out_file, in_file=None, track_num=None, chapter_num=None,
     if in_file is None:
         if track_num is None:
             raise ValueError("Nothing to check against")
-        in_len = get_track_len(track_num, chapter=chapter_num)
+        in_len = get_track_len(track_num, chapter=chapter_num, device=device)
     else:
         in_len = get_file_len(in_file)
     file_len = get_file_len(out_file)
