@@ -43,7 +43,7 @@ def get_lsdvd(track_num=None, chapter=False, device=None):
         cmd.append("-c")
     cmd.extend(["-Oy", device])
     p = Popen(cmd, stdout=PIPE)
-    stdout, stderr = p.communicate()
+    stdout, _ = p.communicate()
     return literal_eval(stdout[8:])
 
 
@@ -60,7 +60,7 @@ def get_track_len(track_num, chapter=None, device=None):
 def get_file_len(eachfile):
     cmd = ["ffmpeg", "-i", eachfile]
     p = Popen(cmd, stderr=PIPE)
-    stdout, stderr = p.communicate()
+    _, stderr = p.communicate()
     for line in stderr.split("\n"):
         if "Duration" in line:
             break
@@ -97,7 +97,7 @@ def time_string_to_seconds(rawdur):
     rawdur, _, mins = rawdur.rpartition(":")
     mins = int(mins)
     hours = int(rawdur)
-    return (3600 * hours + 60 * mins + sec + (milli / 1000))
+    return 3600 * hours + 60 * mins + sec + (milli / 1000)
 
 
 def get_subtitle_flags():
