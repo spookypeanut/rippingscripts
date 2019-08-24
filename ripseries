@@ -23,7 +23,7 @@ def main():
     hbflags = get_handbrake_flags(args)
 
     if args.tracks:
-        tracks = map(int, args.tracks.split(" "))
+        tracks = map(int, args.tracks.strip().split(" "))
     else:
         tracks = Finder().find_series()
     print(tracks)
