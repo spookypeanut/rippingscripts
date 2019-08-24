@@ -7,7 +7,7 @@ from copy import copy
 HBDVDDEV = "/dev/dvd"
 HBEXT = ".m4v"
 HBCODEC = "x264"
-HBAUDIOBITRATE = 160
+HBAUDIOBITRATE = 256
 HBVIDEOQUALITY = 21
 DEFAULT_SUBTITLE_FLAGS = ["--subtitle", "scan", "--subtitle-forced", "scan"]
 DEFAULT_CODEC_FLAGS = {"ref": 1, "weightp": 1, "subq": 2,
