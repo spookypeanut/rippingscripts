@@ -1,0 +1,27 @@
+Disc Title: SIMPSONS_SEASON3_DISC1
+Title: 01, Length: 00:22:08.080 Chapters: 07, Cells: 07, Audio streams: 03, Subpictures: 07
+Title: 02, Length: 00:22:07.080 Chapters: 07, Cells: 07, Audio streams: 02, Subpictures: 07
+Title: 03, Length: 00:22:02.600 Chapters: 07, Cells: 07, Audio streams: 02, Subpictures: 07
+Title: 04, Length: 00:22:06.200 Chapters: 07, Cells: 07, Audio streams: 02, Subpictures: 07
+Title: 05, Length: 00:22:08.400 Chapters: 07, Cells: 07, Audio streams: 02, Subpictures: 07
+Title: 06, Length: 00:22:07.200 Chapters: 06, Cells: 06, Audio streams: 02, Subpictures: 07
+Title: 07, Length: 00:22:07.200 Chapters: 06, Cells: 06, Audio streams: 02, Subpictures: 07
+Title: 08, Length: 00:00:17.080 Chapters: 01, Cells: 01, Audio streams: 01, Subpictures: 07
+Title: 09, Length: 00:00:32.160 Chapters: 01, Cells: 01, Audio streams: 01, Subpictures: 07
+Title: 10, Length: 00:00:32.000 Chapters: 01, Cells: 01, Audio streams: 01, Subpictures: 07
+Title: 11, Length: 00:00:17.080 Chapters: 01, Cells: 01, Audio streams: 01, Subpictures: 07
+Title: 12, Length: 00:00:17.080 Chapters: 01, Cells: 01, Audio streams: 01, Subpictures: 07
+Title: 13, Length: 00:05:19.120 Chapters: 02, Cells: 51, Audio streams: 01, Subpictures: 07
+Title: 14, Length: 00:04:28.240 Chapters: 03, Cells: 52, Audio streams: 01, Subpictures: 07
+Title: 15, Length: 00:04:05.760 Chapters: 02, Cells: 52, Audio streams: 01, Subpictures: 07
+Title: 16, Length: 00:04:15.440 Chapters: 03, Cells: 52, Audio streams: 01, Subpictures: 07
+Title: 17, Length: 00:04:00.080 Chapters: 02, Cells: 40, Audio streams: 01, Subpictures: 07
+Title: 18, Length: 00:05:19.600 Chapters: 52, Cells: 52, Audio streams: 00, Subpictures: 07
+Title: 19, Length: 00:04:28.240 Chapters: 52, Cells: 52, Audio streams: 00, Subpictures: 07
+Title: 20, Length: 00:04:05.760 Chapters: 52, Cells: 52, Audio streams: 00, Subpictures: 07
+Title: 21, Length: 00:04:15.440 Chapters: 52, Cells: 52, Audio streams: 00, Subpictures: 07
+Title: 22, Length: 00:04:00.080 Chapters: 40, Cells: 40, Audio streams: 00, Subpictures: 07
+Title: 23, Length: 00:00:12.000 Chapters: 03, Cells: 03, Audio streams: 02, Subpictures: 07
+Title: 24, Length: 00:00:04.000 Chapters: 01, Cells: 01, Audio streams: 02, Subpictures: 07
+Title: 25, Length: 00:00:26.840 Chapters: 01, Cells: 01, Audio streams: 01, Subpictures: 07
+Longest track: 05

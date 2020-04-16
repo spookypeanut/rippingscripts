@@ -1,0 +1,14 @@
+Disc Title: SIMPSONS_SEASON4_D1
+Title: 01, Length: 00:21:59.920 Chapters: 07, Cells: 07, Audio streams: 06, Subpictures: 06
+Title: 02, Length: 00:22:06.160 Chapters: 07, Cells: 07, Audio streams: 02, Subpictures: 06
+Title: 03, Length: 00:22:05.160 Chapters: 07, Cells: 07, Audio streams: 02, Subpictures: 06
+Title: 04, Length: 00:22:05.440 Chapters: 06, Cells: 06, Audio streams: 02, Subpictures: 06
+Title: 05, Length: 00:00:26.840 Chapters: 01, Cells: 01, Audio streams: 06, Subpictures: 06
+Title: 06, Length: 00:00:10.040 Chapters: 01, Cells: 01, Audio streams: 06, Subpictures: 06
+Title: 07, Length: 00:17:05.360 Chapters: 01, Cells: 02, Audio streams: 02, Subpictures: 06
+Title: 08, Length: 00:09:38.880 Chapters: 01, Cells: 04, Audio streams: 01, Subpictures: 06
+Title: 09, Length: 00:02:07.840 Chapters: 01, Cells: 01, Audio streams: 01, Subpictures: 06
+Title: 10, Length: 00:05:08.000 Chapters: 01, Cells: 01, Audio streams: 01, Subpictures: 06
+Title: 11, Length: 00:13:55.320 Chapters: 01, Cells: 01, Audio streams: 01, Subpictures: 06
+Title: 12, Length: 00:01:55.640 Chapters: 01, Cells: 01, Audio streams: 01, Subpictures: 06
+Longest track: 02

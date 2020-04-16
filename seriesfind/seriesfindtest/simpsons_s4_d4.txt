@@ -1,0 +1,25 @@
+Disc Title: SIMPSONS_SEASON4_D4
+Title: 01, Length: 00:22:09.160 Chapters: 07, Cells: 07, Audio streams: 02, Subpictures: 06
+Title: 02, Length: 00:22:06.520 Chapters: 07, Cells: 07, Audio streams: 02, Subpictures: 06
+Title: 03, Length: 00:21:44.160 Chapters: 07, Cells: 13, Audio streams: 02, Subpictures: 06
+Title: 04, Length: 00:22:10.800 Chapters: 07, Cells: 07, Audio streams: 02, Subpictures: 06
+Title: 05, Length: 00:22:09.920 Chapters: 07, Cells: 07, Audio streams: 02, Subpictures: 06
+Title: 06, Length: 00:22:07.600 Chapters: 06, Cells: 06, Audio streams: 02, Subpictures: 06
+Title: 07, Length: 00:21:44.160 Chapters: 07, Cells: 13, Audio streams: 02, Subpictures: 06
+Title: 08, Length: 00:06:01.000 Chapters: 01, Cells: 01, Audio streams: 01, Subpictures: 06
+Title: 09, Length: 00:03:55.640 Chapters: 01, Cells: 04, Audio streams: 01, Subpictures: 06
+Title: 10, Length: 00:00:19.240 Chapters: 01, Cells: 01, Audio streams: 02, Subpictures: 06
+Title: 11, Length: 00:00:22.920 Chapters: 01, Cells: 01, Audio streams: 02, Subpictures: 06
+Title: 12, Length: 00:00:10.000 Chapters: 01, Cells: 01, Audio streams: 02, Subpictures: 06
+Title: 13, Length: 00:00:18.840 Chapters: 01, Cells: 01, Audio streams: 02, Subpictures: 06
+Title: 14, Length: 00:00:14.920 Chapters: 01, Cells: 01, Audio streams: 02, Subpictures: 06
+Title: 15, Length: 00:00:12.560 Chapters: 01, Cells: 01, Audio streams: 02, Subpictures: 06
+Title: 16, Length: 00:00:19.240 Chapters: 01, Cells: 01, Audio streams: 01, Subpictures: 06
+Title: 17, Length: 00:00:22.920 Chapters: 01, Cells: 01, Audio streams: 01, Subpictures: 06
+Title: 18, Length: 00:00:10.000 Chapters: 01, Cells: 01, Audio streams: 01, Subpictures: 06
+Title: 19, Length: 00:00:18.840 Chapters: 01, Cells: 01, Audio streams: 01, Subpictures: 06
+Title: 20, Length: 00:00:14.920 Chapters: 01, Cells: 01, Audio streams: 01, Subpictures: 06
+Title: 21, Length: 00:00:12.560 Chapters: 01, Cells: 01, Audio streams: 01, Subpictures: 06
+Title: 22, Length: 00:00:26.840 Chapters: 01, Cells: 01, Audio streams: 01, Subpictures: 06
+Title: 23, Length: 00:00:10.040 Chapters: 01, Cells: 01, Audio streams: 02, Subpictures: 06
+Longest track: 04

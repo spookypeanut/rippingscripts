@@ -1,0 +1,20 @@
+Disc Title: FUTURAMA_DISC_1
+Title: 01, Length: 00:21:34.960 Chapters: 05, Cells: 05, Audio streams: 04, Subpictures: 08
+Title: 02, Length: 00:21:35.120 Chapters: 05, Cells: 05, Audio streams: 04, Subpictures: 08
+Title: 03, Length: 00:21:36.000 Chapters: 05, Cells: 05, Audio streams: 04, Subpictures: 08
+Title: 04, Length: 00:21:36.400 Chapters: 05, Cells: 05, Audio streams: 04, Subpictures: 08
+Title: 05, Length: 00:25:45.240 Chapters: 01, Cells: 01, Audio streams: 01, Subpictures: 08
+Title: 06, Length: 00:01:23.360 Chapters: 01, Cells: 01, Audio streams: 01, Subpictures: 08
+Title: 07, Length: 00:00:58.360 Chapters: 01, Cells: 01, Audio streams: 01, Subpictures: 08
+Title: 08, Length: 00:00:38.800 Chapters: 01, Cells: 01, Audio streams: 01, Subpictures: 08
+Title: 09, Length: 00:00:46.080 Chapters: 96, Cells: 96, Audio streams: 00, Subpictures: 08
+Title: 10, Length: 00:00:46.080 Chapters: 96, Cells: 96, Audio streams: 00, Subpictures: 08
+Title: 11, Length: 00:00:46.080 Chapters: 96, Cells: 96, Audio streams: 00, Subpictures: 08
+Title: 12, Length: 00:00:02.880 Chapters: 06, Cells: 06, Audio streams: 00, Subpictures: 08
+Title: 13, Length: 00:00:45.120 Chapters: 94, Cells: 94, Audio streams: 00, Subpictures: 08
+Title: 14, Length: 00:00:37.440 Chapters: 78, Cells: 78, Audio streams: 00, Subpictures: 08
+Title: 15, Length: 00:00:38.880 Chapters: 80, Cells: 81, Audio streams: 00, Subpictures: 08
+Title: 16, Length: 00:00:44.160 Chapters: 92, Cells: 92, Audio streams: 00, Subpictures: 08
+Title: 17, Length: 00:00:00.480 Chapters: 01, Cells: 01, Audio streams: 00, Subpictures: 08
+Title: 18, Length: 00:00:26.840 Chapters: 01, Cells: 01, Audio streams: 03, Subpictures: 08
+Longest track: 05

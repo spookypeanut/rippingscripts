@@ -4,9 +4,9 @@ from subprocess import Popen, PIPE
 
 # If two tracks are within this percentage, they could be part of a
 # series
-LENGTHDIFF = 25
+LENGTHDIFF = 20
 
-tests = {"csi_s1_p2_d1": [1, 2, 3, 4], "csi_s1_p2_d2": [1, 2, 3, 4],
+TESTS = {"csi_s1_p2_d1": [1, 2, 3, 4], "csi_s1_p2_d2": [1, 2, 3, 4],
          "csi_s1_p2_d3": [1, 2, 3, 4], "csi_s2_p1_d1": [1, 2, 3, 4],
          "csi_s2_p1_d3": [1, 2, 3, 4], "csi_s2_p2_d1": [1, 2, 3, 4],
          "csi_s2_p2_d3": [1, 2, 3], "fatherted_s2_d1": [1, 2, 3, 4, 5],
@@ -19,10 +19,17 @@ tests = {"csi_s1_p2_d1": [1, 2, 3, 4], "csi_s1_p2_d2": [1, 2, 3, 4],
          "csi_s4_p1_d3": [2, 3, 5, 6], "friends_27": [1, 2, 3, 4, 5, 6],
          "clonewars_s1_v3": [2, 3, 4, 5, 6, 7],
          "csi_s7_p1_d2": [3, 4, 6, 7], "buffy_s2_d6": [1, 2],
-         "dinnerladies_s1": [2, 3, 4, 5, 6, 7]}
+         "dinnerladies_s1": [2, 3, 4, 5, 6, 7],
+         "simpsons_s3_d1": [1, 2, 3, 4, 5, 6],
+         "simpsons_s3_d2": [1, 2, 3, 4, 5, 6],
+         "simpsons_s3_d3": [1, 2, 3, 4, 5, 6],
+         "simpsons_s3_d4": [1, 2, 3, 4, 5, 6],
+         "simpsons_s4_d1": [1, 2, 3, 4],
+         "simpsons_s4_d3": [1, 2, 3, 4, 5, 6],
+         "simpsons_s4_d4": [1, 2, 3, 4, 5, 6]}
 
-# csi_s3_p2_d1: contains a 1h episode. Matches if LENGTHDIFF goes to 40,
-#               but that seems rather extreme
+EXPECTED_ERRORS = {"csi_s3_p2_d1": "contains a 1h episode. Matches if "
+                   "LENGTHDIFF goes to 40, but that seems rather extreme"}
 
 
 def run_tests():
@@ -37,16 +44,18 @@ def run_tests():
             lsdvd = f.readlines()
         f = Finder(lsdvd)
         result = f.find_series()
-        if name not in tests:
+        if name not in TESTS:
             print("No expected result for %s" % filepath)
             print("Output: %s" % (result,))
             continue
-        expected_result = tests[name]
+        expected_result = TESTS[name]
         if result == expected_result:
             print("Success: %s" % name)
         else:
             print("ERROR: %s" % name)
             print("result: %s, expected: %s" % (result, expected_result))
+            if name in EXPECTED_ERRORS:
+                print("Expected: %s" % EXPECTED_ERRORS[name])
 
 
 def get_lsdvd():
