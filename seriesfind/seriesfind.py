@@ -61,7 +61,7 @@ def run_tests():
 def get_lsdvd():
     p = Popen(["lsdvd"], stdout=PIPE)
     stdout, _ = p.communicate()
-    return stdout.split("\n")
+    return stdout.decode().split("\n")
 
 
 def is_close(l1, l2):

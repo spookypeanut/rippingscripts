@@ -7,7 +7,7 @@ from copy import copy
 HBDVDDEV = "/dev/dvd"
 HBEXT = ".m4v"
 HBCODEC = "x264"
-HBAUDIOBITRATE = 256
+HBAUDIOBITRATE = 160
 HBVIDEOQUALITY = 21
 DEFAULT_SUBTITLE_FLAGS = ["--subtitle", "scan", "--subtitle-forced", "scan"]
 DEFAULT_CODEC_FLAGS = {"ref": 1, "weightp": 1, "subq": 2,
@@ -43,8 +43,8 @@ def get_lsdvd(track_num=None, chapter=False, device=None):
         cmd.append("-c")
     cmd.extend(["-Oy", device])
     p = Popen(cmd, stdout=PIPE)
-    stdout, _ = p.communicate()
-    return literal_eval(stdout[8:])
+    stdout, stderr = p.communicate()
+    return literal_eval(stdout.decode()[8:])
 
 
 def get_track_len(track_num, chapter=None, device=None):
@@ -58,10 +58,12 @@ def get_track_len(track_num, chapter=None, device=None):
 
 
 def get_file_len(eachfile):
+    if not os.path.exists(eachfile):
+        raise RuntimeError("File '%s' doesn't exist" % eachfile)
     cmd = ["ffmpeg", "-i", eachfile]
     p = Popen(cmd, stderr=PIPE)
-    _, stderr = p.communicate()
-    for line in stderr.split("\n"):
+    stdout, stderr = p.communicate()
+    for line in stderr.decode().split("\n"):
         if "Duration" in line:
             break
     else:
@@ -77,7 +79,7 @@ def check_length(out_file, in_file=None, track_num=None, chapter_num=None,
     if in_file is None:
         if track_num is None:
             raise ValueError("Nothing to check against")
-        in_len = get_track_len(track_num, chapter=chapter_num, device=device)
+        in_len = get_track_len(track_num, chapter=chapter_num)
     else:
         in_len = get_file_len(in_file)
     file_len = get_file_len(out_file)
@@ -97,7 +99,7 @@ def time_string_to_seconds(rawdur):
     rawdur, _, mins = rawdur.rpartition(":")
     mins = int(mins)
     hours = int(rawdur)
-    return 3600 * hours + 60 * mins + sec + (milli / 1000)
+    return (3600 * hours + 60 * mins + sec + (milli / 1000))
 
 
 def get_subtitle_flags():
