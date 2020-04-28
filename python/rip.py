@@ -13,6 +13,7 @@ STDERR_DUMP = "/tmp/rip.log"
 HANDBRAKE_BOOLEANS = set(["animation", "decomb", "deinterlace"])
 CODEC_SETTINGS = {
     "x264": {"flags": {"ref": 1, "weightp": 1, "subq": 2, "rc-lookahead": 10,
+                       "trellis": 0, "8x8dct": 0},
              "video_quality": 21},
     "x265": {"flags": {}, "video_quality": 21}
 }
