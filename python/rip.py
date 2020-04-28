@@ -7,7 +7,7 @@ from copy import copy
 HBDVDDEV = "/dev/dvd"
 HBEXT = ".m4v"
 DEFAULT_CODEC = "x265"
-HBAUDIOBITRATE = 160
+HBAUDIOBITRATE = 192
 DEFAULT_SUBTITLE_FLAGS = ["--subtitle", "scan", "--subtitle-forced", "scan"]
 STDERR_DUMP = "/tmp/rip.log"
 HANDBRAKE_BOOLEANS = set(["animation", "decomb", "deinterlace"])
