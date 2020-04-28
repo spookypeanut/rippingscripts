@@ -6,14 +6,16 @@ from copy import copy
 
 HBDVDDEV = "/dev/dvd"
 HBEXT = ".m4v"
-HBCODEC = "x264"
+DEFAULT_CODEC = "x264"
 HBAUDIOBITRATE = 160
-HBVIDEOQUALITY = 21
 DEFAULT_SUBTITLE_FLAGS = ["--subtitle", "scan", "--subtitle-forced", "scan"]
-DEFAULT_CODEC_FLAGS = {"ref": 1, "weightp": 1, "subq": 2,
-                       "rc-lookahead": 10, "trellis": 0, "8x8dct": 0}
 STDERR_DUMP = "/tmp/rip.log"
 HANDBRAKE_BOOLEANS = set(["animation", "decomb", "deinterlace"])
+CODEC_SETTINGS = {
+    "x264": {"flags": {"ref": 1, "weightp": 1, "subq": 2, "rc-lookahead": 10,
+             "video_quality": 21},
+    "x265": {"flags": {}, "video_quality": 21}
+}
 
 
 class RippingError(Exception):
@@ -122,13 +124,14 @@ def dump_stderr(text):
 
 
 def rip_track(filename, track_num=None, device=None, inputfile=None,
-              chapter=None, handbrake_flags=None):
-    codecflags = copy(DEFAULT_CODEC_FLAGS)
-    compiled_flags = ":".join(["%s=%s" % a for a in codecflags.items()])
+              chapter=None, handbrake_flags=None, codec=DEFAULT_CODEC):
+    codec_settings = CODEC_SETTINGS[codec]
+    codec_flags = codec_settings["flags"]
+    compiled_flags = ":".join(["%s=%s" % a for a in codec_flags.items()])
     codec_args = ["-x", compiled_flags]
     if handbrake_flags["animation"] is True:
         warning("Using animation tuning")
-        codec_args = ["--x264-tune", "animation"] + codec_args
+        codec_args = ["--%s-tune" % codec, "animation"] + codec_args
 
     if filename.endswith(HBEXT):
         outpath = filename
@@ -160,7 +163,7 @@ def rip_track(filename, track_num=None, device=None, inputfile=None,
     if handbrake_flags["deinterlace"] is True:
         warning("Using deinterlace")
         HBCMD.append("--deinterlace")
-    HBCMD.extend(["-e", HBCODEC, "-q", str(HBVIDEOQUALITY),
+    HBCMD.extend(["-e", codec, "-q", str(codec_settings["video_quality"]),
                   "-B", str(HBAUDIOBITRATE)])
     HBCMD.extend(codec_args)
     print("Running %s" % HBCMD)
