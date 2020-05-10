@@ -28,7 +28,14 @@ TESTS = {
     "simpsons_s4_d1": [1, 2, 3, 4],
     "simpsons_s4_d3": [1, 2, 3, 4, 5, 6],
     "simpsons_s4_d4": [1, 2, 3, 4, 5, 6],
-    "24_s5_d3": [2, 3, 4, 5]
+    "24_s5_d3": [2, 3, 4, 5],
+    "withoutatrace_s6_d1_s1": [2, 3, 4, 5],
+    "withoutatrace_s6_d1_s2": [2, 3, 4, 5],
+    "withoutatrace_s6_d2_s1": [2, 3, 4, 5],
+    "withoutatrace_s6_d2_s2": [2, 3, 4, 5],
+    "withoutatrace_s6_d3": [2, 3],
+    "futurama_s1_d1": [1, 2, 3, 4],
+    "futurama_s1_d2": [1, 2, 3, 4, 5]
 }
 
 
