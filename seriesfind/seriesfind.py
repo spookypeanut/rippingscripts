@@ -76,8 +76,9 @@ def is_close(l1, l2):
 
 
 class Finder(object):
-    def __init__(self, lsdvd=None):
+    def __init__(self, lsdvd=None, skip_duplicates=True):
         self._parsed = None
+        self.skip_duplicates = skip_duplicates
         if lsdvd is None:
             self.lsdvd = get_lsdvd()
         else:
@@ -96,6 +97,8 @@ class Finder(object):
             lengthstr = splitteded[3]
             h, m, s = lengthstr.split(":")
             sec = float(s) + int(m) * 60 + int(h) * 3600
+            if self.skip_duplicates and sec in parsed.values():
+                continue
             parsed[int(tracknum)] = sec
         self._parsed = parsed
         return parsed
