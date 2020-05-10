@@ -43,7 +43,9 @@ TESTS = {
 EXPECTED_ERRORS = {
     "csi_s3_p2_d1": "contains a 1h episode. Matches if LENGTHDIFF goes to 40, "
                     "but that seems rather extreme",
-    "clonewars_s1_v3": "two episodes that are exactly the same length"
+    "clonewars_s1_v3": "two episodes that are exactly the same length",
+    "futurama_s1_d1": "animatic is 25m, compared to episode at 21m. Fixed if "
+                      "LENGTHDIFF is 15, but that breaks friends_27"
 }
 
 
