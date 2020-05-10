@@ -77,6 +77,12 @@ def is_close(l1, l2):
 
 class Finder(object):
     def __init__(self, lsdvd=None, skip_duplicates=True):
+        """
+        :param lsdvd: The output of lsdvd. If not provided, run lsdvd.
+        :param skip_duplicates: If two tracks have exactly the same duration,
+                                throw a warning and skip the entry with the
+                                greater track number.
+        """
         self._parsed = None
         self.skip_duplicates = skip_duplicates
         if lsdvd is None:
@@ -86,27 +92,38 @@ class Finder(object):
 
     @property
     def lengths(self):
+        """ The duration of the tracks, as a list. """
         if self._parsed is not None:
             return self._parsed
         parsed = {}
         for line in self.lsdvd:
             if not line.startswith("Title"):
                 continue
+            # Really, we should do this by regex
             splitteded = line.split()
-            tracknum = splitteded[1].strip(",")
+            tracknum = int(splitteded[1].strip(","))
             lengthstr = splitteded[3]
             h, m, s = lengthstr.split(":")
             sec = float(s) + int(m) * 60 + int(h) * 3600
             if self.skip_duplicates and sec in parsed.values():
                 continue
-            parsed[int(tracknum)] = sec
+            parsed[tracknum] = sec
         self._parsed = parsed
         return parsed
 
     def get_series_length(self, series):
+        """ Get the total duration (in seconds) of the given series of tracks.
+        """
         return sum([self.lengths[track] for track in series])
 
     def get_potential(self):
+        """ Find multiple potential serieses. This means finding all sets of
+        tracks that are within the given threshold of each other, and returning
+        all of them. E.g. on a disc with 6 30 minute episodes and 2 hour long
+        special features, it might return [[1, 2, 3, 4, 5, 6], [8, 9]]
+        """
+        # Create a dictionary with keys of track numbers, and value of a
+        # list of all tracks that are close in length to it
         close = {}
         for track in self.lengths:
             for match in self.lengths:
@@ -116,6 +133,10 @@ class Finder(object):
                     if track not in close:
                         close[track] = []
                     close[track].append(match)
+        # Now go through that dictionary, create set of the track numbers (and
+        # the current track), and add it to our potential serieses.
+        # TODO: This is overly complicated. I feel like this could be
+        # all one small loop.
         potential_series = []
         for track, near_tracks in close.items():
             one_series = set(near_tracks)
@@ -127,6 +148,8 @@ class Finder(object):
 
     def find_series(self):
         potential = self.get_potential()
+        # Go through all the potential serieses, and assume that the one
+        # with the longest duration is the one we're after.
         series_lengths = {}
         for series in potential:
             length = self.get_series_length(series)
