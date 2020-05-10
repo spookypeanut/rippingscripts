@@ -6,27 +6,31 @@ from subprocess import Popen, PIPE
 # series
 LENGTHDIFF = 20
 
-TESTS = {"csi_s1_p2_d1": [1, 2, 3, 4], "csi_s1_p2_d2": [1, 2, 3, 4],
-         "csi_s1_p2_d3": [1, 2, 3, 4], "csi_s2_p1_d1": [1, 2, 3, 4],
-         "csi_s2_p1_d3": [1, 2, 3, 4], "csi_s2_p2_d1": [1, 2, 3, 4],
-         "csi_s2_p2_d3": [1, 2, 3], "fatherted_s2_d1": [1, 2, 3, 4, 5],
-         "doctorwho_s1_d1": [3, 4, 5], "mightboosh_s2_d1": [2, 3, 4, 5, 6, 7],
-         "tomandjerry_v4_s1": [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
-         "doctorwho_s1_d4": [7, 8, 9], "doctorwho_s1_d2": [4, 5, 6],
-         "csi_s3_p1_d1": [2, 3, 4, 5], "csi_s3_p1_d2": [2, 3, 4, 5],
-         "csi_s3_p1_d3": [2, 3, 4, 5], "csi_s3_p2_d1": [2, 3, 4, 5],
-         "csi_s3_p2_d2": [4, 5, 6, 7], "csi_s3_p2_d3": [2, 3, 4],
-         "csi_s4_p1_d3": [2, 3, 5, 6], "friends_27": [1, 2, 3, 4, 5, 6],
-         "clonewars_s1_v3": [2, 3, 4, 5, 6, 7],
-         "csi_s7_p1_d2": [3, 4, 6, 7], "buffy_s2_d6": [1, 2],
-         "dinnerladies_s1": [2, 3, 4, 5, 6, 7],
-         "simpsons_s3_d1": [1, 2, 3, 4, 5, 6],
-         "simpsons_s3_d2": [1, 2, 3, 4, 5, 6],
-         "simpsons_s3_d3": [1, 2, 3, 4, 5, 6],
-         "simpsons_s3_d4": [1, 2, 3, 4, 5, 6],
-         "simpsons_s4_d1": [1, 2, 3, 4],
-         "simpsons_s4_d3": [1, 2, 3, 4, 5, 6],
-         "simpsons_s4_d4": [1, 2, 3, 4, 5, 6]}
+TESTS = {
+    "csi_s1_p2_d1": [1, 2, 3, 4], "csi_s1_p2_d2": [1, 2, 3, 4],
+    "csi_s1_p2_d3": [1, 2, 3, 4], "csi_s2_p1_d1": [1, 2, 3, 4],
+    "csi_s2_p1_d3": [1, 2, 3, 4], "csi_s2_p2_d1": [1, 2, 3, 4],
+    "csi_s2_p2_d3": [1, 2, 3], "fatherted_s2_d1": [1, 2, 3, 4, 5],
+    "doctorwho_s1_d1": [3, 4, 5], "mightboosh_s2_d1": [2, 3, 4, 5, 6, 7],
+    "tomandjerry_v4_s1": [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+    "doctorwho_s1_d4": [7, 8, 9], "doctorwho_s1_d2": [4, 5, 6],
+    "csi_s3_p1_d1": [2, 3, 4, 5], "csi_s3_p1_d2": [2, 3, 4, 5],
+    "csi_s3_p1_d3": [2, 3, 4, 5], "csi_s3_p2_d1": [2, 3, 4, 5],
+    "csi_s3_p2_d2": [4, 5, 6, 7], "csi_s3_p2_d3": [2, 3, 4],
+    "csi_s4_p1_d3": [2, 3, 5, 6], "friends_27": [1, 2, 3, 4, 5, 6],
+    "clonewars_s1_v3": [2, 3, 4, 5, 6, 7],
+    "csi_s7_p1_d2": [3, 4, 6, 7], "buffy_s2_d6": [1, 2],
+    "dinnerladies_s1": [2, 3, 4, 5, 6, 7],
+    "simpsons_s3_d1": [1, 2, 3, 4, 5, 6],
+    "simpsons_s3_d2": [1, 2, 3, 4, 5, 6],
+    "simpsons_s3_d3": [1, 2, 3, 4, 5, 6],
+    "simpsons_s3_d4": [1, 2, 3, 4, 5, 6],
+    "simpsons_s4_d1": [1, 2, 3, 4],
+    "simpsons_s4_d3": [1, 2, 3, 4, 5, 6],
+    "simpsons_s4_d4": [1, 2, 3, 4, 5, 6],
+    "24_s5_d3": [2, 3, 4, 5]
+}
+
 
 EXPECTED_ERRORS = {"csi_s3_p2_d1": "contains a 1h episode. Matches if "
                    "LENGTHDIFF goes to 40, but that seems rather extreme"}
