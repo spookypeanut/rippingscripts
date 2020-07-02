@@ -48,8 +48,7 @@ EXPECTED_ERRORS = {
 
 
 def run_tests():
-    f = Finder()
-    print("Current DVD in drive: %s" % f.find_series())
+    print("Current DVD in drive: %s" % Finder().find_series())
     basepath = os.path.dirname(__file__)
     test_path = os.path.join(basepath, "seriesfindtest")
     all_lsdvds = sorted(glob(os.path.join(test_path, "*.txt")))
@@ -57,8 +56,7 @@ def run_tests():
         name = os.path.basename(filepath).rpartition(".txt")[0]
         with open(filepath, "r") as f:
             lsdvd = f.readlines()
-        f = Finder(lsdvd)
-        result = f.find_series()
+        result = Finder(lsdvd).find_series()
         if name not in TESTS:
             print("No expected result for %s" % filepath)
             print("Output: %s" % (result,))
