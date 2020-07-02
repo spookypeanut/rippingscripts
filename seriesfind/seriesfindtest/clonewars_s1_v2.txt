@@ -1,0 +1,9 @@
+Disc Title: CLONE_WARS_VOL_2_DISC_2
+Title: 01, Length: 01:47:00.440 Chapters: 21, Cells: 25, Audio streams: 04, Subpictures: 05
+Title: 02, Length: 00:20:31.600 Chapters: 05, Cells: 05, Audio streams: 04, Subpictures: 05
+Title: 03, Length: 00:21:32.600 Chapters: 05, Cells: 05, Audio streams: 04, Subpictures: 05
+Title: 04, Length: 00:21:37.040 Chapters: 05, Cells: 05, Audio streams: 04, Subpictures: 05
+Title: 05, Length: 00:21:37.600 Chapters: 05, Cells: 05, Audio streams: 04, Subpictures: 05
+Title: 06, Length: 00:21:41.600 Chapters: 05, Cells: 05, Audio streams: 04, Subpictures: 05
+Title: 07, Length: 00:00:09.480 Chapters: 02, Cells: 02, Audio streams: 04, Subpictures: 05
+Longest track: 01
