@@ -40,8 +40,11 @@ TESTS = {
 }
 
 
-EXPECTED_ERRORS = {"csi_s3_p2_d1": "contains a 1h episode. Matches if "
-                   "LENGTHDIFF goes to 40, but that seems rather extreme"}
+EXPECTED_ERRORS = {
+    "csi_s3_p2_d1": "contains a 1h episode. Matches if LENGTHDIFF goes to 40, "
+                    "but that seems rather extreme",
+    "clonewars_s1_v3": "two episodes that are exactly the same length"
+}
 
 
 def run_tests():
