@@ -14,6 +14,8 @@ def parse_arguments():
     p.add_argument("--series", help="The series number")
     p.add_argument("--start", help="The episode number to start at")
     p.add_argument("--tracks", help="The tracks to rip")
+    phelp = "If two tracks have exactly the same length, skip one"
+    p.add_argument("--dontskipsametime", action="store_true", help=phelp)
     p = add_handbrake_flags(p)
     return p.parse_args()
 
@@ -25,8 +27,17 @@ def main():
     if args.tracks:
         tracks = map(int, args.tracks.strip().split(" "))
     else:
-        tracks = Finder().find_series()
-    print(tracks)
+        noskip_tracks = Finder(skip_duplicates=False).find_series()
+        if args.dontskipsametime:
+            tracks = noskip_tracks
+        else:
+            skip_tracks = Finder(skip_duplicates=True).find_series()
+            difference = set(noskip_tracks) - set(skip_tracks)
+            if difference:
+                skip = ", ".join(map(str, sorted(difference)))
+                print("WARNING: These tracks are being skipped because they ")
+                print("WARNING: have identical lengths to others: %s" % skip)
+            tracks = skip_tracks
     print("Tracks to rip: %s (%s in total)" % (tracks, len(tracks)))
     if args.name:
         name = args.name
