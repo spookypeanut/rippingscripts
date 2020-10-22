@@ -120,7 +120,7 @@ def warning(msg):
 
 def dump_stderr(text):
     with open(STDERR_DUMP, "w") as f:
-        f.write(text)
+        f.write(text.decode())
     print("stderr of rip written to %s" % STDERR_DUMP)
 
 
