@@ -88,7 +88,7 @@ def check_length(out_file, in_file=None, track_num=None, chapter_num=None,
     file_len = get_file_len(out_file)
     diff = abs(1.0 * in_len - file_len)
     print("Input: %ss, Output: %ss (diff: %ss)" % (in_len, file_len, diff))
-    if diff <= 5:
+    if diff <= 10:
         return True
     return False
 
