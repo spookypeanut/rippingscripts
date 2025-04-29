@@ -37,6 +37,9 @@ def get_handbrake_flags(args):
 
 
 def get_lsdvd(track_num=None, chapter=False, device=None):
+    """
+    """
+    print("get_lsdvd(%s, %s, %s)" % (track_num, chapter, device))
     if device is None:
         device = HBDVDDEV
     cmd = ["lsdvd"]
@@ -47,7 +50,17 @@ def get_lsdvd(track_num=None, chapter=False, device=None):
     cmd.extend(["-Oy", device])
     p = Popen(cmd, stdout=PIPE)
     stdout, stderr = p.communicate()
-    return literal_eval(stdout.decode()[8:])
+    output = []
+    started = False
+    for eachline in stdout.decode().split("\n"):
+        if eachline.startswith("lsdvd"):
+            started = True
+            output.append(eachline[8:])
+            continue
+        if not started:
+            continue
+        output.append(eachline)
+    return literal_eval(" ".join(output))
 
 
 def get_track_len(track_num, chapter=None, device=None):
